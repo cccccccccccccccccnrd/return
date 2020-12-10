@@ -16,10 +16,25 @@ function placeMaps () {
     div.className = 'map'
     document.body.appendChild(div)
 
-    maps[id] = L.map(`map-${id}`).setView([51.505, -0.09], 13)
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    const position = state.devices[id][0]
+
+    maps[id] = L.map(`map-${id}`).setView([position.lat, position.lng], 15)
+    L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: ''
     }).addTo(maps[id])
+
+    const latlngs = state.devices[id].map((point) => [point.lat, point.lng])
+    console.log(latlngs)
+    L.polyline(latlngs, { color: 'blue', fill: false }).addTo(maps[id])
+
+    state.devices[id].map((point) => {
+      L.circle([point.lat, point.lng], {
+        color: 'blue',
+        fillColor: 'blue',
+        fillOpacity: 1,
+        radius: 10
+      }).addTo(maps[id])
+    })
   })
 }
 
