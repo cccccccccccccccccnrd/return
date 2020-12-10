@@ -98,7 +98,7 @@ function placeMaps () {
         color: index === 0 ? 'red' : 'blue',
         fillColor: index === 0 ? 'red' : 'blue',
         fillOpacity: 1,
-        radius: index === 0 ? 40 : 10
+        radius: index === 0 ? 10 : 2
       }).addTo(maps[id].map)
     })
   })
