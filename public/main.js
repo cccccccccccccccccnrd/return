@@ -17,8 +17,9 @@ function placeMaps () {
     document.body.appendChild(div)
 
     const position = state.devices[id][0]
+    console.log(position)
 
-    maps[id] = L.map(`map-${id}`).setView([position.lat, position.lng], 15)
+    maps[id] = L.map(`map-${id}`).setView([position.lat, position.lng], 11)
     L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: ''
     }).addTo(maps[id])

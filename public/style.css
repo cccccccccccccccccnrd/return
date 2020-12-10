@@ -16,7 +16,7 @@ body {
 }
 
 .map {
-  width: 100%;
+  width: 20%;
   height: 100vh;
   border-right: 1px blue solid;
 }
