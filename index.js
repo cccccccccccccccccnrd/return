@@ -26,7 +26,6 @@ const devices = [
   'https://www.finder-portal.com/viewmode_69224_71d674a0ffc66991c63c0c1f5d33709e3ff0bec7.html'
 ]
 
-
 //////////// webserver, where the content is stored and can be accessed //////////
 const app = express()
 
@@ -103,4 +102,3 @@ async function update () {
 // define update time 
 setInterval(update, 30 * 1000)
 update()
-
