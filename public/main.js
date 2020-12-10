@@ -1,14 +1,27 @@
 let state = {}
 let maps = {}
 
+let counterInterval
+let reloadInterval
+
 const interval = 30
 let counter = interval
 
 const deviceSelect = document.querySelector('#device-select')
+const updateInput = document.querySelector('#update-input')
 const timestampDiv = document.querySelector('#timestamp')
 
 deviceSelect.addEventListener('change', (event) => {
   showMap(deviceSelect.value)
+})
+
+updateInput.addEventListener('change', (event) => {
+  console.log(updateInput.checked)
+  if (updateInput.checked) {
+    startUpdating()
+  } else {
+    stopUpdating()
+  }
 })
 
 async function getState () {
@@ -17,8 +30,17 @@ async function getState () {
   state = json
 }
 
-function startCounter() {
-  setInterval(() => {
+function stopUpdating () {
+  clearInterval(reloadInterval)
+  clearInterval(counterInterval)
+  document.querySelector('#counter').innerHTML = ''
+}
+
+function startUpdating () {
+  counter = interval
+
+  reloadInterval = setInterval(replaceMaps, interval * 1000)
+  counterInterval = setInterval(() => {
     if (counter === 1) {
       counter = interval
     } else {
@@ -47,8 +69,6 @@ function showMap (id) {
 
 function placeUi (onlyTimestamp) {
   if (!onlyTimestamp) {
-    startCounter()
-
     const ids = Object.keys(state.devices)
     ids.forEach((id) => {
       const opt = document.createElement('option')
@@ -117,5 +137,4 @@ async function init (onlyTimestamp) {
   }
 }
 
-setInterval(replaceMaps, interval * 1000)
 init()
