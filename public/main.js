@@ -2,7 +2,6 @@ let state = {}
 let maps = {}
 
 let counterInterval
-let reloadInterval
 
 const interval = 30
 let counter = interval
@@ -31,18 +30,18 @@ async function getState () {
 }
 
 function stopUpdating () {
-  clearInterval(reloadInterval)
   clearInterval(counterInterval)
   document.querySelector('#counter').innerHTML = ''
 }
 
 function startUpdating () {
   counter = interval
+  document.querySelector('#counter').innerHTML = interval
 
-  reloadInterval = setInterval(replaceMaps, interval * 1000)
   counterInterval = setInterval(() => {
     if (counter === 1) {
       counter = interval
+      replaceMaps()
     } else {
       counter--
     }
