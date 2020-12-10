@@ -19,7 +19,7 @@ function placeMaps () {
     const position = state.devices[id][0]
     console.log(position)
 
-    maps[id] = L.map(`map-${id}`).setView([position.lat, position.lng], 11)
+    maps[id] = L.map(`map-${id}`).setView([position.lat, position.lng], 18)
     L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: ''
     }).addTo(maps[id])
@@ -28,12 +28,12 @@ function placeMaps () {
     console.log(latlngs)
     L.polyline(latlngs, { color: 'blue', fill: false }).addTo(maps[id])
 
-    state.devices[id].map((point) => {
+    state.devices[id].map((point, index) => {
       L.circle([point.lat, point.lng], {
-        color: 'blue',
-        fillColor: 'blue',
+        color: index === 0 ? 'red' : 'blue',
+        fillColor: index === 0 ? 'red' : 'blue',
         fillOpacity: 1,
-        radius: 10
+        radius: index === 0 ? 40 : 10
       }).addTo(maps[id])
     })
   })
