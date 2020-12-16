@@ -147,12 +147,16 @@ async function update () {
       lng = state.devices[dev_id][0].lng
       lat_old = state.devices[dev_id][1].lat
       lng_old = state.devices[dev_id][1].lng
+      lat_old2 = state.devices[dev_id][2].lat
+      lng_old2 = state.devices[dev_id][2].lng
   
       //console.log("Tracker ID: " + dev_id + " Position: " + "LAT: " + lat + " LNG: " + lng);
       //console.log("Tracker ID: " + dev_id + " Old Position: " + "LAT: " + lat_old + " LNG: " + lng_old);
-  
+      console.log("LAT Median: " + ((lat-lat_old)+(lat_old-lat_old2))/2)
+      console.log("LNG Median " + ((lng-lng_old)+(lng_old-lng_old2))/2)
+      
       // difference treshhold to give a notification is 0.0003 at the moment
-      if (Math.abs(lat - lat_old) > mov_threshold || Math.abs(lng - lng_old) > mov_threshold){
+      if (Math.abs((lat-lat_old)+(lat_old-lat_old2)/2) > mov_threshold || Math.abs((lng-lng_old)+(lng_old-lng_old2)/2) > mov_threshold ){
         if (movement[i] == false) {
           console.notify("🛰: " + dev_id + " ➡️ 🌍")
           movement[i] = true;
