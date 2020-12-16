@@ -13,6 +13,12 @@ var myArgs = process.argv.slice(2);
 console.log("CHAT_ID: -" + myArgs[0])
 console.log("TOKEN: " + myArgs[1])
 
+mov_threshold = myArgs[2]
+
+if(typeof mov_threshold === 'undefined') {
+  alert('Variable "comment" is undefined.');
+}
+
 // importing npm modules
 const path = require('path')
 const fetch = require('node-fetch')
@@ -72,7 +78,7 @@ bot.hears('my_id', (ctx) => {
 
 bot.startPolling()
 
-bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started');
+//bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started');
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -142,11 +148,11 @@ async function update () {
       lat_old = state.devices[dev_id][1].lat
       lng_old = state.devices[dev_id][1].lng
   
-      console.log("Tracker ID: " + dev_id + " Position: " + "LAT: " + lat + " LNG: " + lng);
-      console.log("Tracker ID: " + dev_id + " Old Position: " + "LAT: " + lat_old + " LNG: " + lng_old);
+      //console.log("Tracker ID: " + dev_id + " Position: " + "LAT: " + lat + " LNG: " + lng);
+      //console.log("Tracker ID: " + dev_id + " Old Position: " + "LAT: " + lat_old + " LNG: " + lng_old);
   
       // difference treshhold to give a notification is 0.0003 at the moment
-      if (Math.abs(lat - lat_old) > 0.0003 || Math.abs(lng - lng_old) > 0.0003){
+      if (Math.abs(lat - lat_old) > mov_threshold || Math.abs(lng - lng_old) > mov_threshold){
         if (movement[i] == false) {
           console.notify("🛰: " + dev_id + " ➡️ 🌍")
           movement[i] = true;
