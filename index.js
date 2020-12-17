@@ -78,7 +78,7 @@ bot.hears('my_id', (ctx) => {
 
 bot.startPolling()
 
-//bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started');
+bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started');
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -152,16 +152,27 @@ async function update () {
   
       //console.log("Tracker ID: " + dev_id + " Position: " + "LAT: " + lat + " LNG: " + lng);
       //console.log("Tracker ID: " + dev_id + " Old Position: " + "LAT: " + lat_old + " LNG: " + lng_old);
-      //console.log("LAT Median: " + ((lat-lat_old)+(lat_old-lat_old2))/2)
-      //console.log("LNG Median " + ((lng-lng_old)+(lng_old-lng_old2))/2)
+      //console.log("dis1-lat: " + (Math.abs(lat_old - lat)))
+      //console.log("dis2-lat: " + (Math.abs(lat_old2 - lat_old)))
+      //console.log("dis1-lng: " + (Math.abs(lng_old - lng)))
+      //console.log("dis2-lng: " + (Math.abs(lng_old2 - lng_old)))
 
-      // difference treshhold to give a notification is 0.0003 at the moment
-      if (Math.abs((lat-lat_old)+(lat_old-lat_old2)/2) > mov_threshold || Math.abs((lng-lng_old)+(lng_old-lng_old2)/2) > mov_threshold ){
+      // difference treshhold to give a notification
+      if (Math.abs(lat_old - lat) > mov_threshold && Math.abs(lat_old2 - lat_old) > mov_threshold){
         if (movement[i] == false) {
           console.notify("🛰: " + dev_id + " ➡️ 🌍")
           movement[i] = true;
           stopped[i] = false;
         }
+
+      // difference treshhold to give a notification
+      if (Math.abs(lng_old - lng) > mov_threshold && Math.abs(lng_old2 - lng_old) > mov_threshold){
+        if (movement[i] == false) {
+          console.notify("🛰: " + dev_id + " ➡️ 🌍")
+          movement[i] = true;
+          stopped[i] = false;
+        }    
+      }  
       
       } else {
         if (stopped[i] == false) {
