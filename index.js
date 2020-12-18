@@ -177,6 +177,7 @@ async function update () {
       } else {
         if (stopped[i] == false) {
           console.notify("🛰: " + dev_id + " 📍" + " LAT: " + lat + " LNG: " + lng)
+          bot.telegram.sendLocation(chat_id, lat, lng)
           stopped[i] = true;
           movement[i] = false;
         }
