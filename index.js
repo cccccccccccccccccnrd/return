@@ -143,38 +143,17 @@ async function update () {
     i = 0;
     for (states in devices){
       dev_id = Object.keys(state.devices)[i]
+      speed = state.devices[dev_id][0].speed
       lat = state.devices[dev_id][0].lat
       lng = state.devices[dev_id][0].lng
-      lat_old = state.devices[dev_id][1].lat
-      lng_old = state.devices[dev_id][1].lng
-      lat_old2 = state.devices[dev_id][2].lat
-      lng_old2 = state.devices[dev_id][2].lng
-  
-      //console.log("Tracker ID: " + dev_id + " Position: " + "LAT: " + lat + " LNG: " + lng);
-      //console.log("Tracker ID: " + dev_id + " Old Position: " + "LAT: " + lat_old + " LNG: " + lng_old);
-      //console.log("dis1-lat: " + (Math.abs(lat_old - lat)))
-      //console.log("dis2-lat: " + (Math.abs(lat_old2 - lat_old)))
-      //console.log("dis1-lng: " + (Math.abs(lng_old - lng)))
-      //console.log("dis2-lng: " + (Math.abs(lng_old2 - lng_old)))
 
-      // difference treshhold to give a notification
-      if (Math.abs(lat_old - lat) > mov_threshold && Math.abs(lat_old2 - lat_old) > mov_threshold){
+      if (speed > mov_threshold ){
         if (movement[i] == false) {
-          console.notify("🛰: " + dev_id + " ➡️ 🌍")
+          console.notify("🛰: " + dev_id + " ➡️ 🌍" + "Speed: " + speed)
           movement[i] = true;
           stopped[i] = false;
         }
-
-      // difference treshhold to give a notification
-      if (Math.abs(lng_old - lng) > mov_threshold && Math.abs(lng_old2 - lng_old) > mov_threshold){
-        if (movement[i] == false) {
-          console.notify("🛰: " + dev_id + " ➡️ 🌍")
-          movement[i] = true;
-          stopped[i] = false;
-        }    
-      }  
-      
-      } else {
+      } else{
         if (stopped[i] == false) {
           console.notify("🛰: " + dev_id + " 📍" + " LAT: " + lat + " LNG: " + lng)
           bot.telegram.sendLocation(chat_id, lat, lng)
