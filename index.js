@@ -5,7 +5,20 @@
 // | |  / ____ \ |__| |          | |__| | |     ____) |    | | | | (_| | (__|   <  __/ |     / ____ \| |    _| |_ 
 // |_| /_/    \_\____/            \_____|_|    |_____/     |_|_|  \__,_|\___|_|\_\___|_|    /_/    \_\_|   |_____|
 //                                                                      
-                       
+
+movement = [false, false, false, false, false]
+stopped = [false, false, false, false, false]
+
+var myArgs = process.argv.slice(2);
+console.log("CHAT_ID: -" + myArgs[0])
+console.log("TOKEN: " + myArgs[1])
+
+mov_threshold = myArgs[2]
+
+if(typeof mov_threshold === 'undefined') {
+  alert('Variable "comment" is undefined.');
+}
+
 // importing npm modules
 const path = require('path')
 const fetch = require('node-fetch')
@@ -46,6 +59,34 @@ app.listen(3000, () => {
   console.log(`serving`)
 })
 //////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////// initialise Telegram Bot //////////////////////////////
+chat_id = "-"
+chat_id = chat_id.concat(myArgs[0])
+token = myArgs[1]
+
+const Telegraf = require('telegraf')
+const bot      = new Telegraf(token)
+bot.start((ctx) => ctx.reply('GPS Bot'))
+
+bot.hears('update', (ctx) => {
+    console.log('ctx:', ctx.update.message.chat.id)
+    ctx.reply('Wait a second, I will send you the current locations of your trackers...')
+    movement = [false, false, false, false, false]
+    stopped = [false, false, false, false, false]
+    update()
+  })
+
+bot.hears('my_id', (ctx) => {
+  console.log('ctx:', ctx.update.message.chat.id)
+  ctx.reply('Chat-ID' + ctx.update.message.chat.id)
+})
+
+bot.startPolling()
+
+bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started');
+//////////////////////////////////////////////////////////////////////////////////
+
 
 // function to receive cookie, we need the cookie in order to do the POST request
 async function getCookie(url) {
@@ -103,8 +144,52 @@ async function update () {
   // adding lastUpdate variable to our state object
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)
+
+    // Define Actions on movement of devices, notifications via Telegram
+    i = 0;
+    for (states in devices){
+      dev_id = Object.keys(state.devices)[i]
+      speed = state.devices[dev_id][0].speed
+      lat = state.devices[dev_id][0].lat
+      lng = state.devices[dev_id][0].lng
+
+      if (speed > mov_threshold ){
+        if (movement[i] == false) {
+          console.notify("🛰: " + dev_id + " ➡️ 🌍" + "Speed: " + speed)
+          movement[i] = true;
+          stopped[i] = false;
+        }
+      } else{
+        if (stopped[i] == false) {
+          console.notify("🛰: " + dev_id + " 📍" + " LAT: " + lat + " LNG: " + lng)
+          bot.telegram.sendLocation(chat_id, lat, lng)
+          stopped[i] = true;
+          movement[i] = false;
+        }
+      }
+      i++;
+    }
 }
 
 // define update time 
 setInterval(update, 30 * 1000)
 update()
+
+// function for easy telegram logging
+function logToTelegram() {
+  const msg = Object.values(arguments).map((msg) => {
+     if(typeof(msg) === "object") {
+        return msg.stack ? msg.stack : JSON.stringify(msg)
+     } else {
+        return String(msg)
+     }
+  }).join("");
+
+  return bot.telegram.sendMessage(chat_id, msg);
+}
+
+console.notify = function() {
+      console.log(...arguments);
+      logToTelegram(...arguments);
+
+}
