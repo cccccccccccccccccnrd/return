@@ -55,7 +55,7 @@ app.get('/api', (req, res) => {
   res.send(JSON.stringify(state, null, 2))
 })
 
-app.listen(3000, () => {
+app.listen(2224, () => {
   console.log(`serving`)
 })
 //////////////////////////////////////////////////////////////////////////////////
