@@ -16,7 +16,7 @@ console.log("TOKEN: " + myArgs[1])
 mov_threshold = myArgs[2]
 
 if(typeof mov_threshold === 'undefined') {
-  alert('Variable "comment" is undefined.');
+  console.log('Variable "comment" is undefined.');
 }
 
 // importing npm modules
