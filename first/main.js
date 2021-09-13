@@ -27,6 +27,7 @@ async function getState () {
   const response = await fetch('api')
   const json = await response.json()
   state = json
+  console.log(state)
 }
 
 function stopUpdating () {
@@ -94,7 +95,7 @@ function replaceMaps () {
 
 function placeMaps () {
   const ids = Object.keys(state.devices)
-  console.log(ids)
+
   ids.forEach((id) => {
     const div = document.createElement('div')
     div.id = `map-${id}`

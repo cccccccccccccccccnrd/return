@@ -18,18 +18,24 @@ let state = {
 }
 
 // URLs of all devices that need to be tracked
-const devices = [
+/* const devices = [
   'https://www.finder-portal.com/viewmode_69219_0d8d9a77846c4b30832ccac9d2b716d60de42f92.html',
   'https://www.finder-portal.com/viewmode_69221_c281b30b2637ac75efb2424f553334cf9d2e28f4.html',
   'https://www.finder-portal.com/viewmode_69222_1b56359903a998f721926c296f1a251591dbfdb1.html',
   'https://www.finder-portal.com/viewmode_69223_2c49dbca1bd3236cd3560e1bc354f05ebf40979d.html',
   'https://www.finder-portal.com/viewmode_69224_71d674a0ffc66991c63c0c1f5d33709e3ff0bec7.html'
+] */
+
+const devices = [
+  'https://www.finder-portal.com/viewmode_116381_ae3a760b73a46b97a4762b0444d59116d113d7bd.html',
+  'https://www.finder-portal.com/viewmode_116376_dfd6e7ebd118eea1412e3e2011423ad4d78ccbef.html'
 ]
 
 //////////// webserver, where the content is stored and can be accessed //////////
 const app = express()
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'return')))
+app.use('/first', express.static(path.join(__dirname, 'first')))
 
 app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'application/json')

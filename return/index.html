@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RETURN</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+</head>
+<body>
+  <main>
+    <h2>RETURN (...BUY IT AGAIN)</h2>
+    <p>This project lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    <p>This project lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.</p>
+    <p>1. Order the device here <br> 2. Charge and power on tracker <br> 3. Submit your tracker ID and return device</p>
+    <input id="id" type="text"/>
+    <button id="submit">submit</button>
+    <br>
+    <small id="info"></small>
+  </main>
+  <aside>
+    <div class="ui">
+      <div id="timestamp"></div>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <input id="update-input" name="update" value="Update" type="checkbox">
+        <div id="counter"></div>
+      </div>
+      <div>
+        <select name="devices" id="device-select">
+          <option value="all">All</option>
+        </select>
+      </div>
+    </div>
+    <div id="maps" class="maps"></div>
+  </aside>
+  <script src="return.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: white;
+  background: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  padding: 0.5em;
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+p {
+  margin: 0 0 1 0;
+  font-family: 'Times New Roman', Times, serif
+}
+
+h2 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 2em;
+}
+
+select {
+  font-size: 1.2em;
+}
+
+aside {
+  width: 100%;
+  max-width: 375px;
+  font-size: 0.8em;
+}
+
+main {
+  max-width: 375px;
+  padding: 1em;
+}
+
+small {
+  display: block;
+  margin: 0.5em 0 0 0;
+  color: red;
+  filter: contrast(3) invert(100);
+  text-shadow: 0em 0em 0.5em red;
+}
+
+.maps {
+  display: flex;
+  flex-flow: column;
+}
+
+.ui {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5vh;
+  color: white;
+  background: black;
+}
+
+.map {
+  width: 100%;
+  height: 375px;
+  filter: contrast(3) invert(100);
+}
+
+.map.hidden {
+  display: none;
+}
+
+.map:last-of-type {
+  border: 0;
+}
+
+@media screen and (max-width: 640px) {
+  body {
+    flex-flow: column-reverse nowrap;
+  }
+}
