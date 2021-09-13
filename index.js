@@ -66,7 +66,7 @@ chat_id = chat_id.concat(myArgs[0])
 token = myArgs[1]
 
 const Telegraf = require('telegraf')
-const bot      = new Telegraf(token)
+/* const bot      = new Telegraf(token)
 bot.start((ctx) => ctx.reply('GPS Bot'))
 
 bot.hears('update', (ctx) => {
@@ -84,7 +84,7 @@ bot.hears('my_id', (ctx) => {
 
 bot.startPolling()
 
-bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started');
+bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started'); */
 //////////////////////////////////////////////////////////////////////////////////
 
 
