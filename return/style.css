@@ -43,6 +43,7 @@ select {
 aside {
   width: 100%;
   max-width: 375px;
+  margin: 0 0 1em 0;
   font-size: 0.8em;
 }
 
