@@ -198,7 +198,6 @@ async function init () {
   setInterval(update, 30 * 1000)
   setInterval(store, 2 * 60 * 60 * 1000)
   await update()
-  console.log('wow')
   await store()
 }
 
