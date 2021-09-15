@@ -132,7 +132,9 @@ function placeMaps () {
         fillColor: index === 0 ? 'red' : 'black',
         fillOpacity: 1,
         radius: index === 0 ? 10 : 1
-      }).addTo(maps[id].map)
+      }).addTo(maps[id].map).on('click', () => {
+        window.open(`http://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
+      })
     })
   })
   Object.keys(state.devices).map((id) => maps[id].map.invalidateSize())

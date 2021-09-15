@@ -70,8 +70,6 @@ bot.hears('/locations', (ctx) => {
 
 bot.startPolling()
 
-bot.telegram.sendMessage(process.env.CHAT_ID, 'bot has been (re)started');
-
 async function retrieve () {
   return await returns.find({})
 }
@@ -119,7 +117,8 @@ async function observer () {
     if (speed > 0.00007) {
       if (!state.devices[devId].moves) {
         /* bot.telegram.sendMessage(process.env.CHAT_ID, "🛰: " + devId + " ➡️ 🌍" + "Speed: " + speed) */
-        bot.telegram.sendMessage(process.env.CHAT_ID, `🛰 ${devId} is one the move (w/ ${speed} km/h)`)
+        bot.telegram.sendMessage(process.env.CHAT_ID, `🛰 ${devId} is one the move (w/ ${speed} km/h). Visit https://return.gruppe5.org/?device=${devId}`)
+        bot.telegram.sendLocation(process.env.CHAT_ID, lat, lng)
         state.devices[devId].moves = true
         state.devices[devId].stopped = false
       }
@@ -151,7 +150,7 @@ async function update () {
     return devices
   }, {})
 
-  observer()
+  /* observer() */
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)
 
