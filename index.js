@@ -100,12 +100,7 @@ async function retrieve () {
 }
 
 function store () {
-  const entry = {
-    list: state,
-    timestamp: Date.now()
-  }
-
-  returns.insert(entry)
+  returns.insert(state)
     .then((entries) => {
       console.log('stored')
     })
