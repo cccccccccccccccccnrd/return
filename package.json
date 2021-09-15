@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "monk": "^7.3.4",
     "node-fetch": "^2.6.1",
     "telegraf": "^3.39.0"
   }

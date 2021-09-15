@@ -20,9 +20,16 @@ if(typeof mov_threshold === 'undefined') {
 }
 
 // importing npm modules
+require('dotenv').config()
 const path = require('path')
 const fetch = require('node-fetch')
 const express = require('express')
+const db = require('monk')(`${ process.env.DB_USER }:${ process.env.DB_PASS }@localhost/return`, { authSource: 'admin' })
+const returns = db.get('returns')
+
+db.then(() => {
+  console.log('connected to db')
+})
 
 // object managing the state, bascially the main object
 let state = {
@@ -88,6 +95,24 @@ bot.startPolling()
 bot.telegram.sendMessage(chat_id, 'Telegram GPS Bot has been started'); */
 //////////////////////////////////////////////////////////////////////////////////
 
+async function retrieve () {
+  return await returns.find({})
+}
+
+function store () {
+  const entry = {
+    list: state,
+    timestamp: Date.now()
+  }
+
+  returns.insert(entry)
+    .then((entries) => {
+      console.log('stored')
+    })
+    .catch((error) => {
+      console.log('while storing', error)
+    })
+}
 
 // function to receive cookie, we need the cookie in order to do the POST request
 async function getCookie(url) {
@@ -146,35 +171,43 @@ async function update () {
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)
 
-    // Define Actions on movement of devices, notifications via Telegram
-    i = 0;
-    for (states in devices){
-      dev_id = Object.keys(state.devices)[i]
-      speed = state.devices[dev_id][0].speed
-      lat = state.devices[dev_id][0].lat
-      lng = state.devices[dev_id][0].lng
+  // Define Actions on movement of devices, notifications via Telegram
+  /* i = 0;
+  for (states in devices) {
+    dev_id = Object.keys(state.devices)[i]
+    speed = state.devices[dev_id][0].speed
+    lat = state.devices[dev_id][0].lat
+    lng = state.devices[dev_id][0].lng
 
-      if (speed > mov_threshold ){
-        if (movement[i] == false) {
-          console.notify("🛰: " + dev_id + " ➡️ 🌍" + "Speed: " + speed)
-          movement[i] = true;
-          stopped[i] = false;
-        }
-      } else{
-        if (stopped[i] == false) {
-          console.notify("🛰: " + dev_id + " 📍" + " LAT: " + lat + " LNG: " + lng)
-          bot.telegram.sendLocation(chat_id, lat, lng)
-          stopped[i] = true;
-          movement[i] = false;
-        }
+    if (speed > mov_threshold) {
+      if (movement[i] == false) {
+        console.notify("🛰: " + dev_id + " ➡️ 🌍" + "Speed: " + speed)
+        movement[i] = true;
+        stopped[i] = false;
       }
-      i++;
+    } else {
+      if (stopped[i] == false) {
+        console.notify("🛰: " + dev_id + " 📍" + " LAT: " + lat + " LNG: " + lng)
+        bot.telegram.sendLocation(chat_id, lat, lng)
+        stopped[i] = true;
+        movement[i] = false;
+      }
     }
+    i++;
+  } */
+
+  return state.devices
 }
 
-// define update time 
-setInterval(update, 30 * 1000)
-update()
+async function init () {
+  setInterval(update, 30 * 1000)
+  setInterval(store, 2 * 60 * 60 * 1000)
+  await update()
+  console.log('wow')
+  await store()
+}
+
+init()
 
 // function for easy telegram logging
 function logToTelegram() {
@@ -189,8 +222,7 @@ function logToTelegram() {
   return bot.telegram.sendMessage(chat_id, msg);
 }
 
-console.notify = function() {
-      console.log(...arguments);
-      logToTelegram(...arguments);
-
+console.notify = function () {
+  console.log(...arguments)
+  /* logToTelegram(...arguments) */
 }
