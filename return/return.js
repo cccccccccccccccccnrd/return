@@ -115,7 +115,7 @@ function placeMaps () {
     div.className = 'map'
     document.querySelector('#maps').appendChild(div)
 
-    const position = state.devices[id][0]
+    const position = state.devices[id].routes[0]
 
     maps[id] = {}
     maps[id].map = L.map(`map-${id}`).setView([position.lat, position.lng], 18)
@@ -123,10 +123,10 @@ function placeMaps () {
         attribution: ''
     }).addTo(maps[id].map)
 
-    const latlngs = state.devices[id].map((point) => [point.lat, point.lng])
+    const latlngs = state.devices[id].routes.map((point) => [point.lat, point.lng])
     maps[id].line = L.polyline(latlngs, { color: 'blue', fill: false }).addTo(maps[id].map)
 
-    state.devices[id].map((point, index) => {
+    state.devices[id].routes.map((point, index) => {
       L.circle([point.lat, point.lng], {
         color: index === 0 ? 'red' : 'black',
         fillColor: index === 0 ? 'red' : 'black',
