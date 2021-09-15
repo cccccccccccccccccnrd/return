@@ -150,7 +150,7 @@ async function update () {
     return devices
   }, {})
 
-  /* observer() */
+  observer()
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)
 
