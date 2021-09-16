@@ -24,16 +24,8 @@ db.then(() => {
 
 const state = {
   lastUpdate: Date.now(),
-  devices: {},
+  devices: {}
 }
-
-/* const devices = [
-  'https://www.finder-portal.com/viewmode_69219_0d8d9a77846c4b30832ccac9d2b716d60de42f92.html',
-  'https://www.finder-portal.com/viewmode_69221_c281b30b2637ac75efb2424f553334cf9d2e28f4.html',
-  'https://www.finder-portal.com/viewmode_69222_1b56359903a998f721926c296f1a251591dbfdb1.html',
-  'https://www.finder-portal.com/viewmode_69223_2c49dbca1bd3236cd3560e1bc354f05ebf40979d.html',
-  'https://www.finder-portal.com/viewmode_69224_71d674a0ffc66991c63c0c1f5d33709e3ff0bec7.html'
-] */
 
 const devices = [
   'https://www.finder-portal.com/viewmode_116381_ae3a760b73a46b97a4762b0444d59116d113d7bd.html',
@@ -107,14 +99,34 @@ async function getAllRoutes(id, cookie) {
   return json[id]
 }
 
-async function observer () {
+async function fetchDevices () {
+  state.devices = await devices.reduce(async (prevDevices, url) => {
+    const devices = await prevDevices
+    const id = url.match(/\d+/)[0]
+    const cookie = await getCookie(url)
+    const routes = await getAllRoutes(id, cookie)
+
+    if (!state.devices[id]) {
+      devices[id] = {}
+    } else {
+      devices[id] = state.devices[id]
+    }
+
+    devices[id].routes = routes
+    return devices
+  }, {})
+
+  return state.devices
+}
+
+async function observe () {
   Object.keys(state.devices).forEach((devId) => {
     const position = state.devices[devId].routes[0]
     const speed = position.speed
     const lat = position.lat
     const lng = position.lng
 
-    if (speed > 0.00007) {
+    if (speed > 2) {
       if (!state.devices[devId].moves) {
         /* bot.telegram.sendMessage(process.env.CHAT_ID, "🛰: " + devId + " ➡️ 🌍" + "Speed: " + speed) */
         bot.telegram.sendMessage(process.env.CHAT_ID, `🛰 ${devId} is one the move (w/ ${speed} km/h). Visit https://return.gruppe5.org/?device=${devId}`)
@@ -133,24 +145,9 @@ async function observer () {
 }
 
 async function update () {
-  state.devices = await devices.reduce(async (prevDevices, url) => {
-    const devices = await prevDevices
-
-    const id = url.match(/\d+/)[0]
-    const cookie = await getCookie(url)
-    const routes = await getAllRoutes(id, cookie)
-
-    if (!state.devices[id]) {
-      devices[id] = {}
-    } else {
-      devices[id] = state.devices[id]
-    }
-
-    devices[id].routes = routes
-    return devices
-  }, {})
-
-  observer()
+  await fetchDevices()
+  observe()
+  
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)
 
