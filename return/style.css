@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -40,16 +44,22 @@ select {
   font-size: 1.2em;
 }
 
-aside {
+main {
+  max-width: 375px;
+  height: 100vh;
+  padding: 1em;
+  overflow-y: scroll;
+}
+
+section {
   width: 100%;
   max-width: 375px;
   margin: 0 0 1em 0;
   font-size: 0.8em;
 }
 
-main {
-  max-width: 375px;
-  padding: 1em;
+aside {
+
 }
 
 small {
@@ -86,6 +96,12 @@ small {
 
 .map:last-of-type {
   border: 0;
+}
+
+.map-full {
+  width: calc(100vw - 375px);
+  height: 100vh;
+  filter: contrast(1) invert(0);
 }
 
 @media screen and (max-width: 640px) {

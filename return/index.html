@@ -24,21 +24,24 @@
     <button id="submit">submit</button>
     <br>
     <small id="info"></small>
+    <section>
+      <div class="ui">
+        <div id="timestamp"></div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <input id="update-input" name="update" value="Update" type="checkbox">
+          <div id="counter"></div>
+        </div>
+        <div>
+          <select name="devices" id="device-select">
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+      <div id="maps" class="maps"></div>
+    </section>
   </main>
   <aside>
-    <div class="ui">
-      <div id="timestamp"></div>
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <input id="update-input" name="update" value="Update" type="checkbox">
-        <div id="counter"></div>
-      </div>
-      <div>
-        <select name="devices" id="device-select">
-          <option value="all">All</option>
-        </select>
-      </div>
-    </div>
-    <div id="maps" class="maps"></div>
+    <div id="map"></div>
   </aside>
   <script src="return.js"></script>
 </body>

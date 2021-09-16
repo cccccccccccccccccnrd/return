@@ -140,10 +140,48 @@ function placeMaps () {
   Object.keys(state.devices).map((id) => maps[id].map.invalidateSize())
 }
 
+function placeMap () {
+  const div = document.createElement('div')
+  div.id = `map-full`
+  div.className = 'map map-full'
+  document.querySelector('#map').appendChild(div)
+
+  const colors = ['blue', 'red', 'purple']
+  const ids = Object.keys(state.devices)
+  const center = state.devices[ids[0]].routes[0]
+
+  maps.full = {}
+  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 13)
+  L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+      attribution: ''
+  }).addTo(maps.full.map)
+  
+  ids.forEach((id, index) => {
+    const latlngs = state.devices[id].routes.map((point) => [point.lat, point.lng])
+    maps.full.line = L.polyline(latlngs, {
+      color: colors[index],
+      fill: false
+    }).addTo(maps.full.map)
+
+    state.devices[id].routes.map((point, i) => {
+      L.circle([point.lat, point.lng], {
+        color: i === 0 ? 'black' : colors[index],
+        fillColor: i === 0 ? 'white' : colors[index],
+        fillOpacity: 1,
+        radius: i === 0 ? 10 : 1
+      }).addTo(maps.full.map).on('click', () => {
+        window.open(`http://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
+      })
+    })
+  })
+  maps.full.map.invalidateSize()
+}
+
 async function init (onlyTimestamp) {
   await getState()
   placeUi(onlyTimestamp)
   placeMaps()
+  placeMap()
 
   const device = new URLSearchParams(window.location.search).get('device')
   if (device) {
