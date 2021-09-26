@@ -163,7 +163,7 @@ function placeMap () {
     const latlngs = state.devices[id].routes.map((point) => [point.lat, point.lng])
     maps.full.line = L.polyline(latlngs, {
       color: colors[index],
-      weight: 1,
+      weight: 2,
       fill: false
     }).addTo(maps.full.map)
 
