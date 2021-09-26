@@ -68,9 +68,9 @@ aside {
 small {
   display: block;
   margin: 0.5em 0 0 0;
-  color: red;
-  filter: contrast(3) invert(100);
-  text-shadow: 0em 0em 0.5em red;
+  color: cyan;
+  filter: contrast(3);
+  text-shadow: 0em 0em 0.5em cyan;
 }
 
 .maps {

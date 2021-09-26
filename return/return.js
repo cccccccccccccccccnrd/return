@@ -134,7 +134,7 @@ function placeMaps () {
         fillOpacity: 1,
         radius: index === 0 ? 10 : 1
       }).addTo(maps[id].map).on('click', () => {
-        window.open(`http://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
+        window.open(`https://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
       })
     })
   })
@@ -154,7 +154,7 @@ function placeMap () {
   maps.full = {}
   maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
-  L.tileLayer('http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
+  L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
       attribution: ''
   }).addTo(maps.full.map)
   
