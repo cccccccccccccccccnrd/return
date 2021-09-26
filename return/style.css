@@ -117,7 +117,7 @@ small {
 
   .map-full {
     width: 100vw;
-    height: 75vh;
+    height: 70vh;
     filter: contrast(1) invert(0);
   }
 }
