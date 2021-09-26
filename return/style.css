@@ -29,6 +29,10 @@ input {
   border-radius: 3px;
 }
 
+a, a:visited {
+  color: cyan;
+}
+
 p {
   margin: 0 0 1 0;
   font-family: 'Times New Roman', Times, serif
