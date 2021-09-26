@@ -24,12 +24,12 @@ body {
 input {
   padding: 0.5em;
   background: transparent;
-  border: 1px solid cyan;
-  border-radius: 3px;
+  /* border: 1px solid silver; */
+  border-radius: 5px;
 }
 
 a, a:visited {
-  color: cyan;
+  color: black;
 }
 
 p {
