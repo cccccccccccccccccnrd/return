@@ -12,6 +12,7 @@ const timestampDiv = document.querySelector('#timestamp')
 const idInput = document.querySelector('#id')
 const submitButton = document.querySelector('#submit')
 const infoSmall = document.querySelector('#info')
+const devicesDiv = document.querySelector('#devices')
 
 submitButton.addEventListener('click', (event) => {
   if (/^\d+$/.test(idInput.value)) {
@@ -175,6 +176,9 @@ function placeMap () {
         window.open(`http://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
       })
     })
+
+    if (index === 0) devicesDiv.innerHTML = ''
+    devicesDiv.innerHTML += `<div><div class="circle" style="background: ${colors[index]}"></div>${id}</div>`
   })
   maps.full.map.invalidateSize()
 }
