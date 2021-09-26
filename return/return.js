@@ -118,18 +118,19 @@ function placeMaps () {
     const position = state.devices[id].routes[0]
 
     maps[id] = {}
-    maps[id].map = L.map(`map-${id}`, { zoomControl: false }).setView([position.lat, position.lng], 18)
+    maps[id].map = L.map(`map-${id}`).setView([position.lat, position.lng], 18)
+    maps[id].map.scrollWheelZoom.disable()
     L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: ''
     }).addTo(maps[id].map)
 
     const latlngs = state.devices[id].routes.map((point) => [point.lat, point.lng])
-    maps[id].line = L.polyline(latlngs, { color: 'blue', fill: false }).addTo(maps[id].map)
+    maps[id].line = L.polyline(latlngs, { color: 'black', fill: false }).addTo(maps[id].map)
 
     state.devices[id].routes.map((point, index) => {
       L.circle([point.lat, point.lng], {
-        color: index === 0 ? 'red' : 'black',
-        fillColor: index === 0 ? 'red' : 'black',
+        color: index === 0 ? 'black' : 'black',
+        fillColor: index === 0 ? 'black' : 'black',
         fillOpacity: 1,
         radius: index === 0 ? 10 : 1
       }).addTo(maps[id].map).on('click', () => {
@@ -146,13 +147,14 @@ function placeMap () {
   div.className = 'map map-full'
   document.querySelector('#map').appendChild(div)
 
-  const colors = ['blue', 'red', 'purple']
+  const colors = ['cyan', 'yellow', 'magenta']
   const ids = Object.keys(state.devices)
   const center = state.devices[ids[0]].routes[0]
 
   maps.full = {}
-  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 13)
-  L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
+  if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
+  L.tileLayer('http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
       attribution: ''
   }).addTo(maps.full.map)
   
@@ -165,8 +167,8 @@ function placeMap () {
 
     state.devices[id].routes.map((point, i) => {
       L.circle([point.lat, point.lng], {
-        color: i === 0 ? 'black' : colors[index],
-        fillColor: i === 0 ? 'white' : colors[index],
+        color: i === 0 ? colors[index] : colors[index],
+        fillColor: i === 0 ? colors[index] : colors[index],
         fillOpacity: 1,
         radius: i === 0 ? 10 : 1
       }).addTo(maps.full.map).on('click', () => {

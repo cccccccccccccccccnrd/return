@@ -146,7 +146,7 @@ async function observe () {
 
 async function update () {
   await fetchDevices()
-  observe()
+  /* observe() */
   
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)

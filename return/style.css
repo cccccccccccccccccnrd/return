@@ -15,17 +15,16 @@ body {
   display: flex;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
-  color: white;
-  background: black;
+  color: black;
+  background: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 input {
   padding: 0.5em;
-  color: white;
   background: transparent;
-  border: 1px solid white;
+  border: 1px solid cyan;
   border-radius: 3px;
 }
 
@@ -84,14 +83,12 @@ small {
   justify-content: space-between;
   align-items: center;
   height: 5vh;
-  color: white;
-  background: black;
 }
 
 .map {
   width: 100%;
   height: 375px;
-  filter: contrast(3) invert(100);
+  filter: contrast(3) invert(0);
 }
 
 .map.hidden {
@@ -111,5 +108,16 @@ small {
 @media screen and (max-width: 640px) {
   body {
     flex-flow: column-reverse nowrap;
+  }
+
+  main {
+    width: 100vw;
+    height: auto;
+  }
+
+  .map-full {
+    width: 100vw;
+    height: 100vh;
+    filter: contrast(1) invert(0);
   }
 }
