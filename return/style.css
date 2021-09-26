@@ -119,5 +119,6 @@ small {
     width: 100vw;
     height: 100vh;
     filter: contrast(1) invert(0);
+    user-select: none;
   }
 }
