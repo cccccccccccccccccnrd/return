@@ -135,7 +135,7 @@ function placeMaps () {
         fillOpacity: 1,
         radius: index === 0 ? 10 : 1
       }).addTo(maps[id].map).on('click', () => {
-        window.open(`https://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
+        window.open(`https://maps.google.com/?q=${point.lat},${point.lng}`, '_blank')
       })
     })
   })
