@@ -118,7 +118,7 @@ function placeMaps () {
     const position = state.devices[id].routes[0]
 
     maps[id] = {}
-    maps[id].map = L.map(`map-${id}`).setView([position.lat, position.lng], 18).setOptions({ zoomControl: false })
+    maps[id].map = L.map(`map-${id}`, { zoomControl: false }).setView([position.lat, position.lng], 18)
     L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
         attribution: ''
     }).addTo(maps[id].map)
