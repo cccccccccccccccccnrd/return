@@ -173,7 +173,7 @@ function placeMap () {
         fillOpacity: 1,
         radius: i === 0 ? 10 : 1
       }).addTo(maps.full.map).on('click', () => {
-        window.open(`http://maps.google.com/maps?z=12&t=m&q=loc:${point.lat}+${point.lng}`, '_blank')
+        window.open(`https://maps.google.com/?q=${point.lat},${point.lng}`, '_blank')
       })
     })
 
