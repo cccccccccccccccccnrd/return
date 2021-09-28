@@ -153,7 +153,7 @@ function placeMap () {
   const center = state.devices[ids[0]].routes[0]
 
   maps.full = {}
-  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 10)
+  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
       attribution: ''
