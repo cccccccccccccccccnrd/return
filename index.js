@@ -65,6 +65,7 @@ bot.hears('/locations', (ctx) => {
 bot.startPolling()
 
 function analyse () {
+  await save()
   const data = load('dump.json')
   const ids = Object.keys(data.devices)
 
