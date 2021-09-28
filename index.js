@@ -67,13 +67,14 @@ bot.startPolling()
 async function analyse () {
   await save()
   const data = load('dump.json')
+  console.log(data)
   const ids = Object.keys(data.devices)
 
   ids.forEach((id, index) => {
     const routes = data.devices[id].routes
     const latlngs = routes.map((point) => [point.lat, point.lng])
     const dbscan = new clustering.DBSCAN()
-    const findings = dbscan.run(latlngs, 0.00005, 15)
+    const findings = dbscan.run(latlngs, 0.00005, 3)
 
     const clusters = findings.map((cluster) => latlngs[cluster[Math.floor(cluster.length / 2)]])
     state.devices[id].clusters = clusters
