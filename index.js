@@ -92,18 +92,12 @@ async function retrieve () {
 }
 
 function dump (payload, filename) {
-  fs.writeFile(path.join(__dirname, filename), JSON.stringify(payload, null, 2), 'utf8', (error, data) => {
-    if (error) {
-      console.log('while dumping', error)
-    } else {
-      console.log('saved')
-    }
-  })
+  fs.writeFileSync(path.join(__dirname, filename), JSON.stringify(payload, null, 2), 'utf8')
 }
 
 async function save () {
   const full = await retrieve()
-  dump(full[full.length - 1], 'dump.json')
+  await dump(full[full.length - 1], 'dump.json')
 }
 
 function store () {
