@@ -12,11 +12,13 @@
 
 require('dotenv').config()
 const path = require('path')
+const fs = require('fs')
 const fetch = require('node-fetch')
 const express = require('express')
 const db = require('monk')(`${ process.env.DB_USER }:${ process.env.DB_PASS }@localhost/return`, { authSource: 'admin' })
 const returns = db.get('returns')
 const Telegraf = require('telegraf')
+const clustering = require('density-clustering')
 
 db.then(() => {
   console.log('connected to db')
@@ -62,8 +64,45 @@ bot.hears('/locations', (ctx) => {
 
 bot.startPolling()
 
+function analyse () {
+  const data = load('dump.json')
+  const ids = Object.keys(data.devices)
+
+  ids.forEach((id, index) => {
+    const routes = data.devices[id].routes
+    const latlngs = routes.map((point) => [point.lat, point.lng])
+    const dbscan = new clustering.DBSCAN()
+    const findings = dbscan.run(latlngs, 0.00005, 15)
+
+    const clusters = findings.map((cluster) => latlngs[cluster[Math.floor(cluster.length / 2)]])
+    state.devices[id].clusters = clusters
+    console.log(`predicted clusters for ${id}`, state.devices[id].clusters.length)
+    /* dump(clusters, 'clusters.json') */
+  })
+}
+
+function load (filename) {
+  const data = fs.readFileSync(path.join(__dirname, filename), 'utf8')
+  return JSON.parse(data)
+}
+
 async function retrieve () {
   return await returns.find({})
+}
+
+function dump (payload, filename) {
+  fs.writeFile(path.join(__dirname, filename), JSON.stringify(payload, null, 2), 'utf8', (error, data) => {
+    if (error) {
+      console.log('while dumping', error)
+    } else {
+      console.log('saved')
+    }
+  })
+}
+
+async function save () {
+  const full = await retrieve()
+  dump(full[full.length - 1], 'dump.json')
 }
 
 function store () {
@@ -112,7 +151,8 @@ async function fetchDevices () {
       devices[id] = state.devices[id]
     }
 
-    devices[id].routes = routes
+    devices[id].routes = routes.filter((point, i) => i % 6 === 0)
+    console.log(id, devices[id].routes.length)
     return devices
   }, {})
 
@@ -159,6 +199,7 @@ async function init () {
   setInterval(store, 2 * 60 * 60 * 1000)
   await update()
   await store()
+  analyse()
 }
 
 init()

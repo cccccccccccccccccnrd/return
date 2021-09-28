@@ -153,7 +153,7 @@ function placeMap () {
   const center = state.devices[ids[0]].routes[0]
 
   maps.full = {}
-  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
+  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 10)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
       attribution: ''
@@ -166,6 +166,17 @@ function placeMap () {
       weight: 2,
       fill: false
     }).addTo(maps.full.map)
+
+    state.devices[id].clusters.map((point, i) => {
+      console.log(point)
+      L.circle(point, {
+        color: colors[index],
+        fillColor: colors[index],
+        fillOpacity: 0,
+        weight: 2,
+        radius: 10000
+      }).addTo(maps.full.map)
+    })
 
     state.devices[id].routes.map((point, i) => {
       L.circle([point.lat, point.lng], {
@@ -181,6 +192,7 @@ function placeMap () {
     if (index === 0) devicesDiv.innerHTML = ''
     devicesDiv.innerHTML += `<div><div class="circle" style="background: ${colors[index]}"></div>${id}</div>`
   })
+
   maps.full.map.invalidateSize()
 }
 

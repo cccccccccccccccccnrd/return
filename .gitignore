@@ -1,3 +1,6 @@
+dump.json
+clusters.json
+
 .DS_Store
 node_modules
 .env
