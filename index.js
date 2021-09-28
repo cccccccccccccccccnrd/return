@@ -67,7 +67,6 @@ bot.startPolling()
 async function analyse () {
   await save()
   const data = load('dump.json')
-  console.log(data)
   const ids = Object.keys(data.devices)
 
   ids.forEach((id, index) => {
