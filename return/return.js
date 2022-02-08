@@ -9,33 +9,31 @@ let counter = interval
 const deviceSelect = document.querySelector('#device-select')
 const updateInput = document.querySelector('#update-input')
 const timestampDiv = document.querySelector('#timestamp')
-const idInput = document.querySelector('#id')
-const submitButton = document.querySelector('#submit')
+/* const idInput = document.querySelector('#id')
+const submitButton = document.querySelector('#submit') */
 const infoSmall = document.querySelector('#info')
 const devicesDiv = document.querySelector('#devices')
 
-submitButton.addEventListener('click', (event) => {
+/* submitButton.addEventListener('click', (event) => {
   if (/^\d+$/.test(idInput.value)) {
     infoSmall.innerText = 'Thank you for your submission.'
-    /* alert('Thank you for your submission.') */
   } else {
     infoSmall.innerText = 'Please only submit a tracker ID.'
-    /* alert('Please only submit a tracker ID.') */
   }
-})
+}) */
 
-deviceSelect.addEventListener('change', (event) => {
+/* deviceSelect.addEventListener('change', (event) => {
   showMap(deviceSelect.value)
-})
+}) */
 
-updateInput.addEventListener('change', (event) => {
+/* updateInput.addEventListener('change', (event) => {
   console.log(updateInput.checked)
   if (updateInput.checked) {
     startUpdating()
   } else {
     stopUpdating()
   }
-})
+}) */
 
 async function getState() {
   const response = await fetch('/api')
@@ -160,7 +158,7 @@ function placeMap() {
 
   const colors = ['cyan', 'yellow', 'magenta', '#49fb35']
   const ids = Object.keys(state.devices)
-  const center = state.devices[ids[0]].routes[0]
+  const center = state.devices[ids[ids.length - 1]].routes[0]
 
   maps.full = {}
   maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
@@ -216,8 +214,8 @@ function placeMap() {
 
 async function init(onlyTimestamp) {
   await getState()
-  placeUi(onlyTimestamp)
-  placeMaps()
+  //placeUi(onlyTimestamp)
+  //placeMaps()
   placeMap()
 
   const device = new URLSearchParams(window.location.search).get('device')
