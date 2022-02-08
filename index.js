@@ -15,7 +15,7 @@ const path = require('path')
 const fs = require('fs')
 const fetch = require('node-fetch')
 const express = require('express')
-const db = require('monk')(`${ process.env.DB_USER }:${ process.env.DB_PASS }@localhost/return`, { authSource: 'admin' })
+const db = require('monk')(`${ process.env.DB_USER }:${ process.env.DB_PASS }@${ process.env.DB_HOST }/return`, { authSource: 'admin' })
 const returns = db.get('returns')
 const Telegraf = require('telegraf')
 const clustering = require('density-clustering')
@@ -31,8 +31,9 @@ const state = {
 
 const devices = [
   'https://www.finder-portal.com/viewmode_116381_ae3a760b73a46b97a4762b0444d59116d113d7bd.html',
+  'https://www.finder-portal.com/viewmode_116904_958d0a2f51d61ade24ba4647deee70ae9d482e29.html',
   'https://www.finder-portal.com/viewmode_116376_dfd6e7ebd118eea1412e3e2011423ad4d78ccbef.html',
-  'https://www.finder-portal.com/viewmode_116904_958d0a2f51d61ade24ba4647deee70ae9d482e29.html'
+  'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html'
 ]
 
 const app = express()

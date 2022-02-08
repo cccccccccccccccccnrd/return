@@ -37,19 +37,19 @@ updateInput.addEventListener('change', (event) => {
   }
 })
 
-async function getState () {
+async function getState() {
   const response = await fetch('/api')
   const json = await response.json()
   state = json
   console.log(state)
 }
 
-function stopUpdating () {
+function stopUpdating() {
   clearInterval(counterInterval)
   document.querySelector('#counter').innerHTML = ''
 }
 
-function startUpdating () {
+function startUpdating() {
   counter = interval
   document.querySelector('#counter').innerHTML = interval
 
@@ -64,7 +64,7 @@ function startUpdating () {
   }, 1000)
 }
 
-function showMap (id) {
+function showMap(id) {
   window.history.pushState({}, {}, `/?device=${id}`)
   document.querySelectorAll('.map').forEach((map) => {
     if (id === 'all') {
@@ -81,7 +81,7 @@ function showMap (id) {
   Object.keys(state.devices).map((id) => maps[id].map.invalidateSize())
 }
 
-function placeUi (onlyTimestamp) {
+function placeUi(onlyTimestamp) {
   if (!onlyTimestamp) {
     const ids = Object.keys(state.devices)
     ids.forEach((id) => {
@@ -98,16 +98,16 @@ function placeUi (onlyTimestamp) {
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    second: 'numeric'
+    second: 'numeric',
   })
 }
 
-function replaceMaps () {
+function replaceMaps() {
   document.querySelectorAll('.map').forEach((map) => map.remove())
   init(true)
 }
 
-function placeMaps () {
+function placeMaps() {
   const ids = Object.keys(state.devices)
 
   ids.forEach((id) => {
@@ -122,33 +122,43 @@ function placeMaps () {
     maps[id].map = L.map(`map-${id}`).setView([position.lat, position.lng], 18)
     maps[id].map.scrollWheelZoom.disable()
     L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-        attribution: ''
+      attribution: '',
     }).addTo(maps[id].map)
 
-    const latlngs = state.devices[id].routes.map((point) => [point.lat, point.lng])
-    maps[id].line = L.polyline(latlngs, { color: 'black', fill: false }).addTo(maps[id].map)
+    const latlngs = state.devices[id].routes.map((point) => [
+      point.lat,
+      point.lng,
+    ])
+    maps[id].line = L.polyline(latlngs, { color: 'black', fill: false }).addTo(
+      maps[id].map
+    )
 
     state.devices[id].routes.map((point, index) => {
       L.circle([point.lat, point.lng], {
         color: index === 0 ? 'black' : 'black',
         fillColor: index === 0 ? 'black' : 'black',
         fillOpacity: 1,
-        radius: index === 0 ? 10 : 1
-      }).addTo(maps[id].map).on('click', () => {
-        window.open(`https://maps.google.com/?q=${point.lat},${point.lng}`, '_blank')
+        radius: index === 0 ? 10 : 1,
       })
+        .addTo(maps[id].map)
+        .on('click', () => {
+          window.open(
+            `https://maps.google.com/?q=${point.lat},${point.lng}`,
+            '_blank'
+          )
+        })
     })
   })
   Object.keys(state.devices).map((id) => maps[id].map.invalidateSize())
 }
 
-function placeMap () {
+function placeMap() {
   const div = document.createElement('div')
   div.id = `map-full`
   div.className = 'map map-full'
   document.querySelector('#map').appendChild(div)
 
-  const colors = ['cyan', 'yellow', 'magenta']
+  const colors = ['cyan', 'yellow', 'magenta', '#49fb35']
   const ids = Object.keys(state.devices)
   const center = state.devices[ids[0]].routes[0]
 
@@ -156,37 +166,45 @@ function placeMap () {
   maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
-      attribution: ''
+    attribution: '',
   }).addTo(maps.full.map)
-  
+
   ids.forEach((id, index) => {
-    const latlngs = state.devices[id].routes.map((point) => [point.lat, point.lng])
+    const latlngs = state.devices[id].routes.map((point) => [
+      point.lat,
+      point.lng,
+    ])
     maps.full.line = L.polyline(latlngs, {
       color: colors[index],
       weight: 2,
-      fill: false
+      fill: false,
     }).addTo(maps.full.map)
 
-    state.devices[id].clusters.map((point, i) => {
-      console.log(point)
+    /* state.devices[id].clusters.map((point, i) => {
+      console.log(point);
       L.circle(point, {
         color: colors[index],
         fillColor: colors[index],
         fillOpacity: 0,
         weight: 2,
-        radius: 10000
-      }).addTo(maps.full.map)
-    })
+        radius: 10000,
+      }).addTo(maps.full.map);
+    }); */
 
     state.devices[id].routes.map((point, i) => {
       L.circle([point.lat, point.lng], {
         color: i === 0 ? colors[index] : colors[index],
         fillColor: i === 0 ? colors[index] : colors[index],
         fillOpacity: 1,
-        radius: i === 0 ? 10 : 1
-      }).addTo(maps.full.map).on('click', () => {
-        window.open(`https://maps.google.com/?q=${point.lat},${point.lng}`, '_blank')
+        radius: i === 0 ? 10 : 1,
       })
+        .addTo(maps.full.map)
+        .on('click', () => {
+          window.open(
+            `https://maps.google.com/?q=${point.lat},${point.lng}`,
+            '_blank'
+          )
+        })
     })
 
     if (index === 0) devicesDiv.innerHTML = ''
@@ -196,7 +214,7 @@ function placeMap () {
   maps.full.map.invalidateSize()
 }
 
-async function init (onlyTimestamp) {
+async function init(onlyTimestamp) {
   await getState()
   placeUi(onlyTimestamp)
   placeMaps()
@@ -204,7 +222,8 @@ async function init (onlyTimestamp) {
 
   const device = new URLSearchParams(window.location.search).get('device')
   if (device) {
-    deviceSelect.selectedIndex = Object.keys(state.devices).findIndex((id) => device === id) + 1
+    deviceSelect.selectedIndex =
+      Object.keys(state.devices).findIndex((id) => device === id) + 1
     showMap(device)
   }
 }
