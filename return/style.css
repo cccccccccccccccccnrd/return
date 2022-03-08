@@ -124,6 +124,14 @@ small {
   filter: contrast(1) invert(0);
 }
 
+#devices .device {
+  cursor: pointer;
+}
+
+#devices .device.disabled {
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 640px) {
   body {
     flex-flow: column-reverse nowrap;
@@ -139,4 +147,10 @@ small {
     height: 70vh;
     filter: contrast(1) invert(0);
   }
+}
+
+/* Leaflet override */
+.leaflet-popup p {
+  margin: 0 !important;
+  font-family: 'Arial', sans-serif !important;
 }

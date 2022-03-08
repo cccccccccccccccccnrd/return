@@ -47,7 +47,7 @@ app.get('/api', (req, res) => {
 })
 
 app.listen(2224, () => {
-  console.log(`serving`)
+  console.log(`serving on http://localhost:2224`)
 })
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
@@ -181,9 +181,13 @@ async function observe () {
 }
 
 async function update () {
-  await fetchDevices()
-  observe()
-  
+  try {
+    await fetchDevices()
+    observe()
+  } catch (error) {
+    console.log('error while fetching devices', error)
+  }
+
   state.lastUpdate = Date.now()
   console.log(`${state.lastUpdate} devices updated`)
 
@@ -191,7 +195,7 @@ async function update () {
 }
 
 async function init () {
-  setInterval(update, 30 * 1000)
+  setInterval(update, 1 * 60 * 1000)
   setInterval(store, 2 * 60 * 60 * 1000)
   await update()
   await store()
