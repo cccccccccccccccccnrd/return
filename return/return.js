@@ -32,6 +32,7 @@ function placeUi(ids) {
   devicesDiv.innerHTML = ''
 
   ids.forEach((id, index) => {
+    // devicesDiv.innerHTML += `<div onclick="toggleDevice('${id}')" id="device-${id}" class="tooltip" class="device"><div class="circle" style="background: ${colors[id]}"><span class="tooltiptext" data-placement="top" >drop-off: Berlin <br> 08.02.2022</span></div>${id}</div>`
     devicesDiv.innerHTML += `<div onclick="toggleDevice('${id}')" id="device-${id}" class="device"><div class="circle" style="background: ${colors[id]}"></div>${id}</div>`
   })
 }

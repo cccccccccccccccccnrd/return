@@ -180,3 +180,24 @@ small {
 input {
   vertical-align: -2px;
 }
+
+/* .tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 1em;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 2;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+} */
