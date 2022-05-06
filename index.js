@@ -40,7 +40,7 @@ const devices = [
 const app = express()
 
 app.use('/', express.static(path.join(__dirname, 'return')))
-app.use('/first', express.static(path.join(__dirname, 'first')))
+app.use('/opencall', express.static(path.join(__dirname, 'opencall')))
 
 app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'application/json')
