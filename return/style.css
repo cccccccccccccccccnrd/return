@@ -75,7 +75,7 @@ small {
 
 #devices {
   display: flex;
-  justify-content: space-between;
+  flex-flow: row wrap;
   font-size: 0.8em;
 }
 

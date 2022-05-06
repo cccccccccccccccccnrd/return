@@ -117,7 +117,6 @@ async function init() {
 
 init()
 
-
 var coll = document.getElementsByClassName('collapsible')
 var i
 
