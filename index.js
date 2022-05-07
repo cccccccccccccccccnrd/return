@@ -127,7 +127,7 @@ async function getAllRoutes(id, cookie) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
       cookie: cookie
-    }, 
+    },
     body: body
   })
 
@@ -148,7 +148,7 @@ async function fetchDevices () {
       devices[id] = state.devices[id]
     }
 
-    devices[id].routes = routes.filter((point, i) => i % 6 === 0)
+    devices[id].routes = routes.filter((point, i) => i % 6 === 0).slice(0, -10)
     console.log(id, devices[id].routes.length)
     return devices
   }, {})
@@ -184,7 +184,7 @@ async function observe () {
 async function update () {
   try {
     await fetchDevices()
-    observe()
+    /* observe() */
   } catch (error) {
     console.log('error while fetching devices', error)
   }
