@@ -184,7 +184,7 @@ async function observe () {
 async function update () {
   try {
     await fetchDevices()
-    /* observe() */
+    observe()
   } catch (error) {
     console.log('error while fetching devices', error)
   }
