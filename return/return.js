@@ -10,10 +10,11 @@ async function getState() {
   const response = await fetch('/api')
   const json = await response.json()
   state = json
-  console.log(state)
+  // delete Test Tracker from UI
+  delete state['devices']['158656']
 }
 
-function toggleDevice (id) {
+function toggleDevice(id) {
   if (activeDevices.has(id)) {
     if (activeDevices.size < 2) return
     activeDevices.delete(id)
@@ -27,7 +28,7 @@ function toggleDevice (id) {
 
 function placeUi(ids) {
   const c = ['cyan', 'yellow', 'magenta', '#49fb35', '#ED0A3F']
-  colors = ids.reduce((o, key, index) => ({...o, [key]: c[index]}), {})
+  colors = ids.reduce((o, key, index) => ({ ...o, [key]: c[index] }), {})
   activeDevices = new Set(ids)
   devicesDiv.innerHTML = ''
 
@@ -89,14 +90,26 @@ function placeMap(ids) {
         radius: i === 0 ? 10 : 1,
       })
         .addTo(maps.full.map)
-        .bindPopup(`<p>Lat: <strong>${Number(point.lat).toFixed(6)}</strong></p><p>Lng: <strong>${Number(point.lng).toFixed(6)}</strong></p><p>Speed: <strong>${point.speed}</strong></p><p>Timestamp: <strong>${new Date(point.dateunix * 1000).toLocaleDateString('de-DE', {
-          year: 'numeric',
-          month: 'numeric',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric'
-        })}</strong></p><p>Maps: <strong><a href="https://maps.google.com/?q=${point.lat},${point.lng}" target="_blank">maps.google.com</a></strong></p>`)
-        /* .on('click', () => {
+        .bindPopup(
+          `<p>Lat: <strong>${Number(point.lat).toFixed(
+            6
+          )}</strong></p><p>Lng: <strong>${Number(point.lng).toFixed(
+            6
+          )}</strong></p><p>Speed: <strong>${
+            point.speed
+          }</strong></p><p>Timestamp: <strong>${new Date(
+            point.dateunix * 1000
+          ).toLocaleDateString('de-DE', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+          })}</strong></p><p>Maps: <strong><a href="https://maps.google.com/?q=${
+            point.lat
+          },${point.lng}" target="_blank">maps.google.com</a></strong></p>`
+        )
+      /* .on('click', () => {
           window.open(
             `https://maps.google.com/?q=${point.lat},${point.lng}`,
             '_blank'
@@ -108,15 +121,6 @@ function placeMap(ids) {
   maps.full.map.invalidateSize()
 }
 
-async function init() {
-  await getState()
-  const ids = Object.keys(state.devices)
-  placeUi(ids)
-  placeMap(ids)
-}
-
-init()
-
 var coll = document.getElementsByClassName('collapsible')
 var i
 
@@ -126,10 +130,19 @@ for (i = 0; i < coll.length; i++) {
     var content = this.nextElementSibling
     if (content.style.maxHeight) {
       content.style.maxHeight = null
-      content.style.margin = "0 0 0 0"
+      content.style.margin = '0 0 0 0'
     } else {
-      content.style.maxHeight = "none"
-      content.style.margin = "0.5em 0 0 0"
+      content.style.maxHeight = 'none'
+      content.style.margin = '0.5em 0 0 0'
     }
   })
 }
+
+async function init() {
+  await getState()
+  const ids = Object.keys(state.devices)
+  placeUi(ids)
+  placeMap(ids)
+}
+
+init()
