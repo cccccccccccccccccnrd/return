@@ -27,7 +27,7 @@ function toggleDevice(id) {
 }
 
 function placeUi(ids) {
-  const c = ['cyan', 'yellow', 'magenta', '#49fb35', '#ED0A3F']
+  const c = ['cyan', 'yellow', 'magenta', '#49fb35', '#ED0A3F', '#8000ff']
   colors = ids.reduce((o, key, index) => ({ ...o, [key]: c[index] }), {})
   activeDevices = new Set(ids)
   devicesDiv.innerHTML = ''
