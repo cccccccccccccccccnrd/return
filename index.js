@@ -37,7 +37,7 @@ const devices = [
   'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
   'https://www.finder-portal.com/viewmode_154662_2425cfb81d087fb5ef20a95fa075b99c8ea9660c.html',
   'https://www.finder-portal.com/viewmode_158656_738089bef79db16a143c90fcc7515923754bca92.html',
-  'https://www.finder-portal.com/viewmode_158991_99fdfc0f4d0beb483516068f2fcc6614f630210f.html'
+  /* 'https://www.finder-portal.com/viewmode_158991_99fdfc0f4d0beb483516068f2fcc6614f630210f.html' */
 ]
 
 const app = express()
