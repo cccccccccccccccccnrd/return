@@ -6,7 +6,7 @@ let colors
 
 const devicesDiv = document.querySelector('#devices')
 
-async function getState() {
+async function getState () {
   const response = await fetch('/api')
   const json = await response.json()
   state = json
@@ -14,7 +14,7 @@ async function getState() {
   delete state['devices']['158656']
 }
 
-function toggleDevice(id) {
+function toggleDevice (id) {
   if (activeDevices.has(id)) {
     if (activeDevices.size < 2) return
     activeDevices.delete(id)
@@ -26,8 +26,16 @@ function toggleDevice(id) {
   placeMap(Array.from(activeDevices))
 }
 
-function placeUi(ids) {
-  const c = ['cyan', 'yellow', 'magenta', '#49fb35', '#ED0A3F', '#8000ff']
+function placeUi (ids) {
+  const c = [
+    'cyan',
+    'yellow',
+    'magenta',
+    '#49fb35',
+    '#ED0A3F',
+    '#8000ff',
+    '#0203e2'
+  ]
   colors = ids.reduce((o, key, index) => ({ ...o, [key]: c[index] }), {})
   activeDevices = new Set(ids)
   devicesDiv.innerHTML = ''
@@ -38,7 +46,7 @@ function placeUi(ids) {
   })
 }
 
-function placeMap(ids) {
+function placeMap (ids) {
   console.log(ids)
   const map = document.querySelector('#map-full')
 
@@ -57,18 +65,18 @@ function placeMap(ids) {
   maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
-    attribution: '',
+    attribution: ''
   }).addTo(maps.full.map)
 
   ids.forEach((id, index) => {
-    const latlngs = state.devices[id].routes.map((point) => [
+    const latlngs = state.devices[id].routes.map(point => [
       point.lat,
-      point.lng,
+      point.lng
     ])
     maps.full.line = L.polyline(latlngs, {
       color: colors[id],
       weight: 2,
-      fill: false,
+      fill: false
     }).addTo(maps.full.map)
 
     /* state.devices[id].clusters.map((point, i) => {
@@ -87,7 +95,7 @@ function placeMap(ids) {
         color: i === 0 ? colors[id] : colors[id],
         fillColor: i === 0 ? colors[id] : colors[id],
         fillOpacity: 1,
-        radius: i === 0 ? 10 : 1,
+        radius: i === 0 ? 10 : 1
       })
         .addTo(maps.full.map)
         .bindPopup(
@@ -104,7 +112,7 @@ function placeMap(ids) {
             month: 'numeric',
             day: 'numeric',
             hour: 'numeric',
-            minute: 'numeric',
+            minute: 'numeric'
           })}</strong></p><p>Maps: <strong><a href="https://maps.google.com/?q=${
             point.lat
           },${point.lng}" target="_blank">maps.google.com</a></strong></p>`
@@ -138,7 +146,7 @@ for (i = 0; i < coll.length; i++) {
   })
 }
 
-async function init() {
+async function init () {
   await getState()
   const ids = Object.keys(state.devices)
   placeUi(ids)
