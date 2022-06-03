@@ -11,9 +11,19 @@
             "description": "Amazon BTS2 is the central fulfilment centre that processes all returns from Europe. This is the centralised location where all trackers meet. It was built in 2017 in the Slovakian city of Sereď and covers an area of around 60.000m2.",
             "image": "https://lh3.googleusercontent.com/p/AF1QipNFU5B1LfxKy1f1cgEAw8IebsR3V8miNsLKFWaa=s0"
         },
+        {"name": "Amazon CGN1",
+            "id": "0002",
+            "lat": "50.347778",
+            "lng": "7.486117",
+            "country": "Germany",
+            "region": "56330 Kobern-Gondorf",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipOA4ApSh08xl4PjtqhUkxFaby-Bq2rHJsQjd2H1=s0"
+            },
         {
             "name": "Amazon DTM8",
-            "id": "0002",
+            "id": "0003",
             "lat": 51.3253668,
             "lng": 6.6934955,
             "country": "Germany",
@@ -24,7 +34,7 @@
         },
         {
             "name": "Amazon KSF7",
-            "id": "0003",
+            "id": "0004",
             "lat": 51.4031014,
             "lng": 9.1952357,
             "country": "Germany",
@@ -35,7 +45,7 @@
         },
         {
             "name": "Amazon KTW1",
-            "id": "0004",
+            "id": "0005",
             "lat": 50.2557612,
             "lng": 19.2008243,
             "country": "Poland",
@@ -46,7 +56,7 @@
         },
         {
             "name": "Amazon LYS8",
-            "id": "0005",
+            "id": "0006",
             "lat": 45.675167,
             "lng": 5.103233,
             "country": "France",
@@ -54,6 +64,39 @@
             "category": "warehouse",
             "description": "",
             "image": "https://lh3.googleusercontent.com/p/AF1QipOdYOljSQ26TGLZnTy6TGLZkaPclfZ2hyMQRqW8=s0"
+        },
+        {
+            "name": "Amazon STR1",
+            "id": "0007",
+            "lat": "48.924362",
+            "lng": "8.724218",
+            "country": "Germany",
+            "region": "75177 Pforzheim",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipMc-OboEsu52NQKgNWiyaRUN5lL16ulF7WEEZiv=s0"
+        },
+        {
+            "name": "CEVA Logistics",
+            "id": "0008",
+            "lat": "52.3491899",
+            "lng": "16.7994325",
+            "country": "Poland",
+            "region": "62-052 Komorniki",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://i.imgur.com/kGJmX9z.png"
+        },
+        {
+            "name": "Relays Colis",
+            "id": "0009",
+            "lat": "48.648167",
+            "lng": "2.557667",
+            "country": "France",
+            "region": "77380 Combs-la-Ville",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipNlMiyA20ob_SjbIjBuOPmwj5FNH24q7nHeXq7j=s0"
         }
     ]
 }
