@@ -1,0 +1,59 @@
+{
+    "discoveries": [
+        {
+            "name": "Amazon BTS2",
+            "id": "0001",
+            "lat": 48.277600,
+            "lng": 17.708850,
+            "country": "Slovakia",
+            "region": "926 01 Sereď",
+            "category": "warehouse",
+            "description": "Amazon BTS2 is the central fulfilment centre that processes all returns from Europe. This is the centralised location where all trackers meet. It was built in 2017 in the Slovakian city of Sereď and covers an area of around 60.000m2.",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipNFU5B1LfxKy1f1cgEAw8IebsR3V8miNsLKFWaa=s0"
+        },
+        {
+            "name": "Amazon DTM8",
+            "id": "0002",
+            "lat": 51.3253668,
+            "lng": 6.6934955,
+            "country": "Germany",
+            "region": "47809 Krefeld",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipMi4O8nJEzoFNRqr7E6S3rbwcVEfkj47KE4kqIM=s0"
+        },
+        {
+            "name": "Amazon KSF7",
+            "id": "0003",
+            "lat": 51.4031014,
+            "lng": 9.1952357,
+            "country": "Germany",
+            "region": "34466 Wolfhagen",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipPQgVk1_hXl-Y_5mpcsF8-wXWSNDgkuHIxveBVf=s0"
+        },
+        {
+            "name": "Amazon KTW1",
+            "id": "0004",
+            "lat": 50.2557612,
+            "lng": 19.2008243,
+            "country": "Poland",
+            "region": "41-208 Sosnowiec",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipO3BnsUVmKd9G6wSyXxGVX9kRJzJxijIBIFFw-Q=s0"
+        },
+        {
+            "name": "Amazon LYS8",
+            "id": "0005",
+            "lat": 45.675167,
+            "lng": 5.103233,
+            "country": "France",
+            "region": "38290 Satolas-et-Bonce",
+            "category": "warehouse",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipOdYOljSQ26TGLZnTy6TGLZkaPclfZ2hyMQRqW8=s0"
+        }
+    ]
+}
