@@ -37,23 +37,27 @@ const devices = [
   {
     url:
       'https://www.finder-portal.com/viewmode_116381_ae3a760b73a46b97a4762b0444d59116d113d7bd.html',
-    dropoff: 10
+    dropoff: 10,
+    offline: true
   },
   {
     url:
       'https://www.finder-portal.com/viewmode_116904_958d0a2f51d61ade24ba4647deee70ae9d482e29.html',
-    dropoff: 10
+    dropoff: 10,
+    offline: true
   },
   {
     url:
       'https://www.finder-portal.com/viewmode_116376_dfd6e7ebd118eea1412e3e2011423ad4d78ccbef.html',
-    dropoff: 10
+    dropoff: 10,
+    offline: true
   },
-  // {
-  //   url:
-  //     'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
-  //   dropoff: 10
-  // },
+  {
+    url:
+      'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
+    dropoff: 10,
+    offline: true
+  },
   {
     url:
       'https://www.finder-portal.com/viewmode_154662_a88a0c17cd5ac9b8ab3c6f022beb00d02b5858bd.html',
@@ -190,24 +194,37 @@ async function getAllRoutes (id, cookie) {
   return json[id]
 }
 
-async function fetchDevices () {
+async function fetchDevices (offline) {
   state.devices = await devices.reduce(async (prevDevices, device) => {
     const devices = await prevDevices
     const id = device.url.match(/\d+/)[0]
-    const cookie = await getCookie(device.url)
-    const routes = await getAllRoutes(id, cookie)
 
-    if (!state.devices[id]) {
-      devices[id] = {}
+    if (device.hasOwnProperty('offline')) {
+      if (offline) {
+        const query = `devices.${id}`
+        const findings = await returns.findOne({ [query]: { '$exists': true } }, { sort: { $natural: -1 } })
+        devices[id] = findings.devices[id]
+        console.log(id, devices[id].routes.length, 'offline')
+        return devices
+      }
+
+      return devices
     } else {
-      devices[id] = state.devices[id]
+      const cookie = await getCookie(device.url)
+      const routes = await getAllRoutes(id, cookie)
+  
+      if (!state.devices[id]) {
+        devices[id] = {}
+      } else {
+        devices[id] = state.devices[id]
+      }
+  
+      devices[id].routes = routes
+        .filter((point, i) => i % 6 === 0)
+        .slice(0, -device.dropoff)
+      console.log(id, devices[id].routes.length)
+      return devices
     }
-
-    devices[id].routes = routes
-      .filter((point, i) => i % 6 === 0)
-      .slice(0, -device.dropoff)
-    console.log(id, devices[id].routes.length)
-    return devices
   }, {})
 
   return state.devices
@@ -241,9 +258,9 @@ async function observe () {
   })
 }
 
-async function update () {
+async function update (offline) {
   try {
-    await fetchDevices()
+    await fetchDevices(offline)
     observe()
   } catch (error) {
     console.log('error while fetching devices', error)
@@ -258,7 +275,7 @@ async function update () {
 async function init () {
   setInterval(update, 1 * 60 * 1000)
   setInterval(store, 2 * 60 * 60 * 1000)
-  await update()
+  await update(true)
   await store()
   analyse()
 }
