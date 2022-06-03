@@ -49,29 +49,29 @@ const devices = [
       'https://www.finder-portal.com/viewmode_116376_dfd6e7ebd118eea1412e3e2011423ad4d78ccbef.html',
     dropoff: 10
   },
+  // {
+  //   url:
+  //     'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
+  //   dropoff: 10
+  // },
   {
     url:
-      'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
+      'https://www.finder-portal.com/viewmode_154662_a88a0c17cd5ac9b8ab3c6f022beb00d02b5858bd.html',
     dropoff: 10
   },
   {
     url:
-      'https://www.finder-portal.com/viewmode_154662_2425cfb81d087fb5ef20a95fa075b99c8ea9660c.html',
+      'https://www.finder-portal.com/viewmode_158656_35389e7d8b92ad447d45b5e2bafca0acf41dbb3f.html',
     dropoff: 10
   },
   {
     url:
-      'https://www.finder-portal.com/viewmode_158656_738089bef79db16a143c90fcc7515923754bca92.html',
+      'https://www.finder-portal.com/viewmode_158991_3060f179a1ff878ceaea1e1cc6a3e6d5af7bc1c8.html',
     dropoff: 10
   },
   {
     url:
-      'https://www.finder-portal.com/viewmode_158991_99fdfc0f4d0beb483516068f2fcc6614f630210f.html',
-    dropoff: 10
-  },
-  {
-    url:
-      'https://www.finder-portal.com/viewmode_159742_e68e9c197f8417acac9ae4a7edf58c4cc6c01fe6.html',
+      'https://www.finder-portal.com/viewmode_159742_34a6ced3c7054db5e903cfffb1a48c1cf482e0a7.html',
     dropoff: 62
   }
 ]
