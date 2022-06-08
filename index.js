@@ -195,7 +195,7 @@ async function getAllRoutes (id, cookie) {
 }
 
 async function fetchDevices (offline) {
-  state.devices = await devices.reduce(async (prevDevices, device) => {
+  state.devices = {...state.devices, ...await devices.reduce(async (prevDevices, device) => {
     const devices = await prevDevices
     const id = device.url.match(/\d+/)[0]
 
@@ -225,7 +225,7 @@ async function fetchDevices (offline) {
       console.log(id, devices[id].routes.length)
       return devices
     }
-  }, {})
+  }, {})}
 
   return state.devices
 }
