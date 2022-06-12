@@ -11,7 +11,8 @@
             "description": "Amazon BTS2 is the central fulfilment centre that processes all returns from Europe. This is the centralised location where all trackers meet. It was built in 2017 in the Slovakian city of Sereď and covers an area of around 60.000m2.",
             "image": "https://lh3.googleusercontent.com/p/AF1QipNFU5B1LfxKy1f1cgEAw8IebsR3V8miNsLKFWaa=s0"
         },
-        {"name": "Amazon CGN1",
+        {
+            "name": "Amazon CGN1",
             "id": "0002",
             "lat": "50.347778",
             "lng": "7.486117",
@@ -20,7 +21,7 @@
             "category": "warehouse",
             "description": "",
             "image": "https://lh3.googleusercontent.com/p/AF1QipOA4ApSh08xl4PjtqhUkxFaby-Bq2rHJsQjd2H1=s0"
-            },
+        },
         {
             "name": "Amazon DTM8",
             "id": "0003",
@@ -88,7 +89,7 @@
             "image": "https://i.imgur.com/kGJmX9z.png"
         },
         {
-            "name": "Relays Colis",
+            "name": "Relais Colis",
             "id": "0009",
             "lat": "48.648167",
             "lng": "2.557667",
@@ -97,6 +98,94 @@
             "category": "warehouse",
             "description": "",
             "image": "https://lh3.googleusercontent.com/p/AF1QipNlMiyA20ob_SjbIjBuOPmwj5FNH24q7nHeXq7j=s0"
+        },
+        {
+            "name": "# KL LOGISTIC spol. s r.o.",
+            "id": "0010",
+            "lat": "48.210395",
+            "lng": "17.731644",
+            "country": "Slovakia",
+            "region": "924 01 Galanta",
+            "category": "#logistics-service",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipNpmsXQ8XISmwoVsqGXCp-ZmRmcaTj-xlkM_JzJ=s0"
+        },
+        {
+            "name": "Briefzentrum Köln-Ost",
+            "id": "",
+            "lat": "50.910033",
+            "lng": "7.047233",
+            "country": "Germany",
+            "region": "51149 Cologne",
+            "category": "#sorting-and-distribution",
+            "description": "",
+            "image": "https://i.imgur.com/pKpcPPD.jpeg"
+        },
+        {
+            "name": "DHL Delivery Köln West GmbH",
+            "id": "",
+            "lat": "50.948583",
+            "lng": "6.906350",
+            "country": "Germany",
+            "region": "50825 Cologne ",
+            "category": "#sorting-and-distribution ",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipMEX93BpR_hUL7ctt365EWMvdvtBCFK7kIpt-OY=s0"
+        },
+        {
+            "name": "DHL Depot Rüdersdorf",
+            "id": "",
+            "lat": "52.4856833",
+            "lng": "13.775378",
+            "country": "Germany",
+            "region": "15562 Rüdersdorf (Berlin)",
+            "category": "#shipping-and-mailing ",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipNrjzVhICvEhZ1uxuPyyV2YqGywWE7Run-LjmdY=s0"
+        },
+        {
+            "name": "DHL Osterather Str",
+            "id": "",
+            "lat": "50.962967",
+            "lng": "6.934833",
+            "country": "Germany",
+            "region": "50739 Cologne",
+            "category": "#sorting-and-distribution",
+            "description": "",
+            "image": "https://i.imgur.com/Z9pstbz.png"
+        },
+        {
+            "name": "DHL Paketzentrum Neumark",
+            "id": "",
+            "lat": "50.667667",
+            "lng": "12.362983",
+            "country": "Germany",
+            "region": "08496 Neumark",
+            "category": "#shipping-and-mailing",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipO6Q0fTr7QqSounFZtQ2MtfdwWSCBaBQlrDsReS=s0"
+        },
+        {
+            "name": "DHL Trade Fairs & Events GmbH Eifeltor",
+            "id": "",
+            "lat": "50.885637",
+            "lng": "6.922695",
+            "country": "Germany",
+            "region": "50997 Cologne",
+            "category": "#freight-forwarding",
+            "description": "",
+            "image": "https://lh3.googleusercontent.com/p/AF1QipNGdXulsJUbfTRKk_X9GCQkWUh4atmpdBQ0uoJR=s0"
+        },
+        {
+            "name": "Relais Colis Saint-Jacques-de-la-Lande",
+            "id": "",
+            "lat": "48.066306",
+            "lng": "-1.704246",
+            "country": "France",
+            "region": "35136 Saint-Jacques-de-la-Lande",
+            "category": "#sorting-and-distribution",
+            "description": "",
+            "image": "https://i.imgur.com/3vJhuzG.png"
         }
     ]
 }
