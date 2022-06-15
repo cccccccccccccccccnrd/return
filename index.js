@@ -14,6 +14,7 @@ require('dotenv').config()
 const path = require('path')
 const fs = require('fs')
 const fetch = require('node-fetch')
+const cors = require('cors')
 const express = require('express')
 const db = require('monk')(
   `${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/return`,
