@@ -81,6 +81,7 @@ const devices = [
 ]
 
 const app = express()
+app.use(cors())
 
 app.use('/', express.static(path.join(__dirname, 'return')))
 app.use('/opencall', express.static(path.join(__dirname, 'opencall')))
