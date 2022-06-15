@@ -14,6 +14,7 @@ require('dotenv').config()
 const path = require('path')
 const fs = require('fs')
 const fetch = require('node-fetch')
+const cors = require('cors')
 const express = require('express')
 const db = require('monk')(
   `${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/return`,
@@ -81,6 +82,7 @@ const devices = [
 ]
 
 const app = express()
+app.use(cors())
 
 app.use('/', express.static(path.join(__dirname, 'return')))
 app.use('/opencall', express.static(path.join(__dirname, 'opencall')))
