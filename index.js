@@ -78,6 +78,11 @@ const devices = [
     url:
       'https://www.finder-portal.com/viewmode_159742_34a6ced3c7054db5e903cfffb1a48c1cf482e0a7.html',
     dropoff: 62
+  },
+  {
+    url:
+      'https://www.finder-portal.com/viewmode_1113168_0e1f30fc02fc9357b8ead44259027ba87c3f5735.html',
+    dropoff: 3
   }
 ]
 
@@ -197,37 +202,43 @@ async function getAllRoutes (id, cookie) {
 }
 
 async function fetchDevices (offline) {
-  state.devices = {...state.devices, ...await devices.reduce(async (prevDevices, device) => {
-    const devices = await prevDevices
-    const id = device.url.match(/\d+/)[0]
+  state.devices = {
+    ...state.devices,
+    ...(await devices.reduce(async (prevDevices, device) => {
+      const devices = await prevDevices
+      const id = device.url.match(/\d+/)[0]
 
-    if (device.hasOwnProperty('offline')) {
-      if (offline) {
-        const query = `devices.${id}`
-        const findings = await returns.findOne({ [query]: { '$exists': true } }, { sort: { $natural: -1 } })
-        devices[id] = findings.devices[id]
-        console.log(id, devices[id].routes.length, 'offline')
+      if (device.hasOwnProperty('offline')) {
+        if (offline) {
+          const query = `devices.${id}`
+          const findings = await returns.findOne(
+            { [query]: { $exists: true } },
+            { sort: { $natural: -1 } }
+          )
+          devices[id] = findings.devices[id]
+          console.log(id, devices[id].routes.length, 'offline')
+          return devices
+        }
+
+        return devices
+      } else {
+        const cookie = await getCookie(device.url)
+        const routes = await getAllRoutes(id, cookie)
+
+        if (!state.devices[id]) {
+          devices[id] = {}
+        } else {
+          devices[id] = state.devices[id]
+        }
+
+        devices[id].routes = routes
+          .filter((point, i) => i % 6 === 0)
+          .slice(0, -device.dropoff)
+        console.log(id, devices[id].routes.length)
         return devices
       }
-
-      return devices
-    } else {
-      const cookie = await getCookie(device.url)
-      const routes = await getAllRoutes(id, cookie)
-  
-      if (!state.devices[id]) {
-        devices[id] = {}
-      } else {
-        devices[id] = state.devices[id]
-      }
-  
-      devices[id].routes = routes
-        .filter((point, i) => i % 6 === 0)
-        .slice(0, -device.dropoff)
-      console.log(id, devices[id].routes.length)
-      return devices
-    }
-  }, {})}
+    }, {}))
+  }
 
   return state.devices
 }
