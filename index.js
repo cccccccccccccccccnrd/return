@@ -81,6 +81,11 @@ const devices = [
   },
   {
     url:
+      'https://www.finder-portal.com/viewmode_1112764_e08e9752fcf0c1bc0a1b09f29c8b37b9e934c5e9.html',
+    dropoff: 90
+  },
+  {
+    url:
       'https://www.finder-portal.com/viewmode_1113168_0e1f30fc02fc9357b8ead44259027ba87c3f5735.html',
     dropoff: 3
   }

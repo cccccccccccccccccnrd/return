@@ -54,6 +54,7 @@ function placeUi (ids) {
     '#ED0A3F',
     '#8000ff',
     '#0203e2',
+    '#299617',
     '#FF7A00'
   ]
   colors = ids.reduce((o, key, index) => ({ ...o, [key]: c[index] }), {})
@@ -218,7 +219,7 @@ function placeMap (ids) {
     `,
     className: '',
     iconSize: [20, 20],
-    iconAnchor: [10,10]
+    iconAnchor: [10, 10]
   })
 
   const discoveries = Object.keys(metadata.discoveries)
@@ -237,7 +238,9 @@ function placeMap (ids) {
 
     var lat = metadata.discoveries[index]['lat']
     var lng = metadata.discoveries[index]['lng']
-    var warehousemaker = L.marker([lat, lng], { icon: svgCircle }).addTo(maps.full.map)
+    var warehousemaker = L.marker([lat, lng], { icon: svgCircle }).addTo(
+      maps.full.map
+    )
   })
 
   ids.forEach(id => {
