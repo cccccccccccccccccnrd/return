@@ -186,7 +186,7 @@ function placeMap (ids, first) {
   const center = first ? [metadata.discoveries[0].lat, metadata.discoveries[0].lng] : maps.full.map.getCenter()
 
   maps.full = {}
-  maps.full.map = L.map(`map-full`).setView(center, 19)
+  maps.full.map = L.map(`map-full`).setView(center, 17)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
     attribution: ''
