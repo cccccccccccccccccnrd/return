@@ -19,6 +19,7 @@ async function getDiscoveries () {
   const response = await fetch('./discoveries.json')
   const json = await response.json()
   metadata = json
+  return json
 }
 
 function zoomTo (lat, lng) {
@@ -183,10 +184,8 @@ function placeMap (ids) {
   div.className = 'map map-full'
   document.querySelector('#map').appendChild(div)
 
-  const center = state.devices[ids[ids.length - 1]].routes[0]
-
   maps.full = {}
-  maps.full.map = L.map(`map-full`).setView([center.lat, center.lng], 19)
+  maps.full.map = L.map(`map-full`).setView([metadata.discoveries[0].lat, metadata.discoveries[0].lng], 19)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
     attribution: ''
@@ -218,29 +217,23 @@ function placeMap (ids) {
     <?xml version="1.0" encoding="UTF-8"?><svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91.32 91.32"><circle cx="45.66" cy="45.66" r="45.66"/></svg>
     `,
     className: '',
-    iconSize: [20, 20],
+    iconSize: [maps.full.map.getZoom() * 2, maps.full.map.getZoom() * 2],
     iconAnchor: [10, 10]
   })
 
   const discoveries = Object.keys(metadata.discoveries)
   discoveries.forEach(index => {
-    var latlng = [
+    const latlngs = [
       metadata.discoveries[index]['lat'],
       metadata.discoveries[index]['lng']
     ]
-    // L.circleMarker(latlng, {
-    //   radius: 10,
-    //   color: '#000',
-    //   stroke: false,
-    //   fillOpacity: 1.0,
-    //   zIndexOffset: 1000
-    // }).addTo(
 
-    var lat = metadata.discoveries[index]['lat']
-    var lng = metadata.discoveries[index]['lng']
-    var warehousemaker = L.marker([lat, lng], { icon: svgCircle }).addTo(
-      maps.full.map
-    )
+    /* L.circle(latlngs, {
+      color: 'black',
+      fillColor: 'black',
+      fillOpacity: 0,
+      radius: 300
+    }).addTo(maps.full.map) */
   })
 
   ids.forEach(id => {

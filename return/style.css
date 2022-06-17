@@ -178,7 +178,7 @@ h3 {
   text-transform: uppercase;
 }
 
-#discoveries div:first-child h3 {
+#discoveries-content div:first-child h3 {
   margin: 0 0 0.5em 0;
 }
 
