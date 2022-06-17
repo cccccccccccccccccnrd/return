@@ -172,7 +172,7 @@ function createLocation (index) {
   container.appendChild(newDescription)
 }
 
-function placeMap (ids) {
+function placeMap (ids, first) {
   const map = document.querySelector('#map-full')
 
   if (map) {
@@ -183,43 +183,15 @@ function placeMap (ids) {
   div.id = `map-full`
   div.className = 'map map-full'
   document.querySelector('#map').appendChild(div)
+  
+  const center = first ? [metadata.discoveries[0].lat, metadata.discoveries[0].lng] : maps.full.map.getCenter()
 
   maps.full = {}
-  maps.full.map = L.map(`map-full`).setView([metadata.discoveries[0].lat, metadata.discoveries[0].lng], 19)
+  maps.full.map = L.map(`map-full`).setView(center, 19)
   if (screen.width < 640) maps.full.map.scrollWheelZoom.disable()
   L.tileLayer('https://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}', {
     attribution: ''
   }).addTo(maps.full.map)
-
-  // L.tileLayer(
-  //   'https://api.mapbox.com/styles/v1/kjellxvx/cl49o2owt000y14lcco71iku4/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia2plbGx4dngiLCJhIjoiY2w0OW1rNTQxMDVxYjNjbGs0dDl4d25nNCJ9.F2_QbQLdMIkWhi9Dkqrh5w',
-  //   {
-  //     attribution: ''
-  //   }
-  // ).addTo(maps.full.map)
-
-  // L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-  //   subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-  // }).addTo(maps.full.map)
-  // maps.full.map.setZoom(17);
-
-  // const svgWarehouse = L.divIcon({
-  //   html: `
-  //   <?xml version="1.0" encoding="UTF-8"?><svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 894.37 1277.67"><defs><style>.b{fill:#fff;}</style></defs><path class="b" d="M447.18,0C199.63,0,0,201.23,0,447.18c0,221.99,367.33,721.88,448.78,830.48,81.46-108.6,445.59-610.09,445.59-832.08C892.76,199.64,693.13,0,447.18,0h0Zm0,654.8c-110.2,0-201.23-91.04-201.23-201.23s91.04-201.23,201.23-201.23,201.23,89.43,201.23,201.23-91.03,201.23-201.23,201.23Z"/><circle cx="447.18" cy="453.57" r="364.2"/><g><g><path class="b" d="M208.56,296.04v352.35c0,8.41,6.82,15.24,15.24,15.24s15.23-6.82,15.23-15.24V306.55l208.16-78.52,208.16,78.52v341.83c0,8.41,6.82,15.24,15.23,15.24s15.24-6.82,15.24-15.24V296.03c0-6.34-3.93-12.01-9.86-14.25l-223.39-84.27c-3.46-1.31-7.29-1.31-10.75,0l-223.39,84.27c-5.93,2.24-9.86,7.91-9.86,14.25h0Z"/><path class="b" d="M531.59,438.12v-138.35c0-8.41-6.82-15.24-15.24-15.24h-138.35c-8.41,0-15.24,6.82-15.24,15.24v138.35c0,8.41,6.82,15.24,15.24,15.24h138.35c8.41,0,15.24-6.82,15.24-15.24h0Zm-30.46-15.23h-107.89v-107.89h107.89v107.89Z"/><path class="b" d="M283.45,494.82c-8.41,0-15.23,6.82-15.23,15.24v138.35c0,8.41,6.82,15.24,15.23,15.24h138.35c8.41,0,15.23-6.82,15.23-15.24v-138.35c0-8.41-6.81-15.24-15.23-15.24h-138.35Zm123.12,138.35h-107.89v-107.89h107.89v107.89Z"/></g><path class="b" d="M472.57,663.64h138.35c8.41,0,15.23-6.82,15.23-15.24v-138.35c0-8.41-6.82-15.24-15.23-15.24h-138.35c-8.41,0-15.23,6.82-15.23,15.24v138.35c0,8.41,6.81,15.24,15.23,15.24Zm15.23-138.35h107.89v107.89h-107.89v-107.89Z"/></g></svg>
-  //   `,
-  //   className: '',
-  //   iconSize: [42, 60],
-  //   iconAnchor: [21, 60]
-  // })
-
-  const svgCircle = L.divIcon({
-    html: `
-    <?xml version="1.0" encoding="UTF-8"?><svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91.32 91.32"><circle cx="45.66" cy="45.66" r="45.66"/></svg>
-    `,
-    className: '',
-    iconSize: [maps.full.map.getZoom() * 2, maps.full.map.getZoom() * 2],
-    iconAnchor: [10, 10]
-  })
 
   const discoveries = Object.keys(metadata.discoveries)
   discoveries.forEach(index => {
@@ -323,7 +295,7 @@ async function init () {
   await getDiscoveries()
   const ids = Object.keys(state.devices)
   placeUi(ids)
-  placeMap(ids)
+  placeMap(ids, 'first')
   placeDiscoveries()
 }
 

@@ -279,7 +279,7 @@ async function observe () {
 async function update (offline) {
   try {
     await fetchDevices(offline)
-   /*  observe() */
+    observe()
   } catch (error) {
     console.log('error while fetching devices', error)
   }
