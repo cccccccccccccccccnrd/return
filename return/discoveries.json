@@ -56,10 +56,10 @@
             "image": "https://lh3.googleusercontent.com/p/AF1QipO3BnsUVmKd9G6wSyXxGVX9kRJzJxijIBIFFw-Q=s0"
         },
         {
-            "name": "Amazon LYS8",
+            "name": "Amazon LYS8", 
             "id": "0006",
-            "lat": 45.6764139,
-            "lng": 5.1073639,
+            "lat": 45.67602903594844,
+            "lng": 5.1038731802217185,
             "country": "France",
             "region": "38290 Satolas-et-Bonce",
             "category": "warehouse",
@@ -69,8 +69,8 @@
         {
             "name": "Amazon STR1",
             "id": "0007",
-            "lat": 48.9234222,
-            "lng": 8.7280472,
+            "lat": 48.923915,
+            "lng": 8.724183,
             "country": "Germany",
             "region": "75177 Pforzheim",
             "category": "warehouse",

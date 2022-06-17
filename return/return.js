@@ -141,7 +141,7 @@ function createLocation (index) {
   containerRight.setAttribute('id', 'discov-container-right')
   const lat = metadata.discoveries[index]['lat']
   const lng = metadata.discoveries[index]['lng']
-  const coordinates = lat + ', ' + lng
+  const coordinates = lat.toFixed(5) + ', ' + lng.toFixed(5)
 
   const LatLng = document.createElement('div')
   const LatLngContent = document.createTextNode(coordinates)
