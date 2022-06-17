@@ -23,8 +23,7 @@ async function getDiscoveries () {
 }
 
 function zoomTo (lat, lng) {
-  maps.full.map.panTo(new L.LatLng(lat, lng))
-  maps.full.map.setZoom(17)
+  maps.full.map.setView([lat, lng], 17)
 }
 
 function scrollToDiscov (divname) {
