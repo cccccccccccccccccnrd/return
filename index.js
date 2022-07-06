@@ -92,7 +92,7 @@ const devices = [
   {
     url:
       'https://www.finder-portal.com/viewmode_1117261_feb7aca1b8494570bfb2b0b867708985dfbc019a.html',
-    dropoff: 0
+    dropoff: 1
   }
 
 
