@@ -56,7 +56,7 @@ function placeUi (ids) {
     '#0203e2',
     '#299617',
     '#FF7A00',
-    '#757575'
+    '#AAF0D1'
   ]
   colors = ids.reduce((o, key, index) => ({ ...o, [key]: c[index] }), {})
   activeDevices = new Set(ids)
