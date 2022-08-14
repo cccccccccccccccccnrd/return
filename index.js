@@ -62,7 +62,8 @@ const devices = [
   {
     url:
       'https://www.finder-portal.com/viewmode_154662_a88a0c17cd5ac9b8ab3c6f022beb00d02b5858bd.html',
-    dropoff: 10
+    dropoff: 10,
+    offline: true
   },
   {
     url:
@@ -72,7 +73,8 @@ const devices = [
   {
     url:
       'https://www.finder-portal.com/viewmode_158991_3060f179a1ff878ceaea1e1cc6a3e6d5af7bc1c8.html',
-    dropoff: 10
+    dropoff: 10,
+    offline: true
   },
   {
     url:
@@ -87,7 +89,8 @@ const devices = [
   {
     url:
       'https://www.finder-portal.com/viewmode_1113168_0e1f30fc02fc9357b8ead44259027ba87c3f5735.html',
-    dropoff: 3
+    dropoff: 3,
+    offline: true
   },
   {
     url:
