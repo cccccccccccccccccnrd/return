@@ -1,13 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
-const { pipeline } = require('node:stream')
-const { promisify } = require('node:util')
-const { createWriteStream } = require('node:fs')
 const fetch = require('node-fetch')
 const quadkey = require('quadkey')
 
-const locations = [{
+const locations = [/* {
   name: 'amazon-bts2',
   area: [
     [48.280767416357835, 17.706282345710502],
@@ -19,7 +16,7 @@ const locations = [{
     [52.351921285404266, 16.79570695461055],
     [52.34631744573774, 16.804974611555108]
   ]
-}, {
+},  */{
   name: 'dhl-eifeltor',
   area: [
     [50.88785527526279, 6.918926271128426],
@@ -55,7 +52,7 @@ function getCoordinates (area) {
   const south = latToTile(area[1][0])
   const west = lngToTile(area[0][1])
   const width = Math.abs(west - east) + 1
-  const height = Math.abs(north - south) + 1 
+  const height = Math.abs(north - south) + 1
 
   return {
     width,
@@ -81,8 +78,7 @@ async function save (location, latlngs) {
     await new Promise((resolve) => setTimeout(async () => {
       const quad = quadkey.toQuaKey(point.lat, point.lng, zoom)
       const response = await fetch(`https://t.ssl.ak.dynamic.tiles.virtualearth.net/comp/ch/${quad}?mkt=en&it=A&og=1955&n=z`)
-      const streamPipeline = promisify(pipeline)
-      await streamPipeline(response.body, createWriteStream(`${folder}/${index}.png`))
+      response.body.pipe(fs.createWriteStream(`${folder}/${index}.png`))
       console.log(location.name, index, quad)
       return resolve()
     }, 200 * index))
