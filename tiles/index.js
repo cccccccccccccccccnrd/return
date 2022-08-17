@@ -4,7 +4,7 @@ const { spawn } = require('child_process')
 const fetch = require('node-fetch')
 const quadkey = require('quadkey')
 
-const locations = [/* {
+const locations = [{
   name: 'amazon-bts2',
   area: [
     [48.280767416357835, 17.706282345710502],
@@ -16,7 +16,7 @@ const locations = [/* {
     [52.351921285404266, 16.79570695461055],
     [52.34631744573774, 16.804974611555108]
   ]
-},  */{
+}, {
   name: 'dhl-eifeltor',
   area: [
     [50.88785527526279, 6.918926271128426],
