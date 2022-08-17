@@ -49,7 +49,6 @@ function divide (array, cap) {
   return Array(Math.ceil(array.length / cap)).fill().map((e, i) => array.slice(i * cap, i * cap + cap))
 }
 
-
 function getCoordinates (area) {
   const north = latToTile(area[0][0])
   const east = lngToTile(area[1][1])
