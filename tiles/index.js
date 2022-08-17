@@ -78,7 +78,7 @@ async function save (location, latlngs) {
     await new Promise((resolve) => setTimeout(async () => {
       const quad = quadkey.toQuaKey(point.lat, point.lng, zoom)
       const response = await fetch(`https://t.ssl.ak.dynamic.tiles.virtualearth.net/comp/ch/${quad}?mkt=en&it=A&og=1955&n=z`)
-      response.body.pipe(fs.createWriteStream(`${folder}/${index}.png`))
+      await response.body.pipe(fs.createWriteStream(`${folder}/${index}.png`))
       console.log(location.name, index, quad)
       return resolve()
     }, 200 * index))
