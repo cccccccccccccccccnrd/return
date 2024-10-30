@@ -97,7 +97,7 @@ const devices = [
   // },
   {
     url: 'https://v2.finder-portal.com/stand-alone-page/viewmode_1011115941_03a1c388af99247710459ed3a02c1e108862abcb',
-    dropoff: 13
+    dropoff: 21
   }
 ]
 
