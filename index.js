@@ -36,78 +36,69 @@ const state = {
 // 158656 is the test tracker!
 const devices = [
   {
-    url:
-      'https://www.finder-portal.com/viewmode_116381_ae3a760b73a46b97a4762b0444d59116d113d7bd.html',
+    url: 'https://www.finder-portal.com/viewmode_116381_ae3a760b73a46b97a4762b0444d59116d113d7bd.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_116904_958d0a2f51d61ade24ba4647deee70ae9d482e29.html',
+    url: 'https://www.finder-portal.com/viewmode_116904_958d0a2f51d61ade24ba4647deee70ae9d482e29.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_116376_dfd6e7ebd118eea1412e3e2011423ad4d78ccbef.html',
+    url: 'https://www.finder-portal.com/viewmode_116376_dfd6e7ebd118eea1412e3e2011423ad4d78ccbef.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
+    url: 'https://www.finder-portal.com/viewmode_141569_280ca18776c4acaefa27865f1cbc0a4a80f501d9.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_154662_a88a0c17cd5ac9b8ab3c6f022beb00d02b5858bd.html',
+    url: 'https://www.finder-portal.com/viewmode_154662_a88a0c17cd5ac9b8ab3c6f022beb00d02b5858bd.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_158656_35389e7d8b92ad447d45b5e2bafca0acf41dbb3f.html',
+    url: 'https://www.finder-portal.com/viewmode_158656_35389e7d8b92ad447d45b5e2bafca0acf41dbb3f.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_158991_3060f179a1ff878ceaea1e1cc6a3e6d5af7bc1c8.html',
+    url: 'https://www.finder-portal.com/viewmode_158991_3060f179a1ff878ceaea1e1cc6a3e6d5af7bc1c8.html',
     dropoff: 10,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_159742_34a6ced3c7054db5e903cfffb1a48c1cf482e0a7.html',
+    url: 'https://www.finder-portal.com/viewmode_159742_34a6ced3c7054db5e903cfffb1a48c1cf482e0a7.html',
     dropoff: 62,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_1112764_e08e9752fcf0c1bc0a1b09f29c8b37b9e934c5e9.html',
+    url: 'https://www.finder-portal.com/viewmode_1112764_e08e9752fcf0c1bc0a1b09f29c8b37b9e934c5e9.html',
     dropoff: 90,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_1113168_0e1f30fc02fc9357b8ead44259027ba87c3f5735.html',
+    url: 'https://www.finder-portal.com/viewmode_1113168_0e1f30fc02fc9357b8ead44259027ba87c3f5735.html',
     dropoff: 3,
     offline: true
   },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_1117261_feb7aca1b8494570bfb2b0b867708985dfbc019a.html',
+    url: 'https://www.finder-portal.com/viewmode_1117261_feb7aca1b8494570bfb2b0b867708985dfbc019a.html',
     dropoff: 1,
     offline: true
   },
+  // {
+  //   url: 'https://www.finder-portal.com/viewmode_1148423_5379434c00181d031887628bbe8c9c8c7849fdba.html',
+  //   dropoff: 20,
+  //   offline: true
+  // },
   {
-    url:
-      'https://www.finder-portal.com/viewmode_1148423_5379434c00181d031887628bbe8c9c8c7849fdba.html',
-    dropoff: 20
+    url: 'https://v2.finder-portal.com/stand-alone-page/viewmode_1011115941_03a1c388af99247710459ed3a02c1e108862abcb',
+    dropoff: 13
   }
-
-
 ]
 
 const app = express()
@@ -199,30 +190,47 @@ function store () {
     })
 }
 
-async function getCookie (url) {
-  const response = await fetch(url)
-  return response.headers.raw()['set-cookie'][0].split(';')[0]
-}
+// async function getCookie (url) {
+//   const response = await fetch(url)
+//   return response.headers.raw()['set-cookie'][0].split(';')[0]
+// }
 
-async function getAllRoutes (id, cookie) {
-  const body = new URLSearchParams()
-  body.append('data', 'allRoutes')
-  body.append(`options[${id}]`, '5')
+// async function getAllRoutes (id, cookie) {
+//   const body = new URLSearchParams()
+//   body.append('data', 'allRoutes')
+//   body.append(`options[${id}]`, '5')
 
+//   const response = await fetch(
+//     'https://www.finder-portal.com/data/endpoints.php',
+//     {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//         cookie: cookie
+//       },
+//       body: body
+//     }
+//   )
+
+//   const json = await response.json()
+//   return json[id]
+// }
+
+async function getAllRoutes (id) {
+  const currentTime = Math.floor(Date.now() / 1000)
+  console.log(id)
   const response = await fetch(
-    'https://www.finder-portal.com/data/endpoints.php',
+    `https://connect.paj-gps.de/api/v1/trackerdata/1011115941/date_range?dateStart=0000000000&dateEnd=${currentTime}`,
     {
-      method: 'POST',
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        cookie: cookie
-      },
-      body: body
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.PAJ_TOKEN}`
+      }
     }
   )
-
   const json = await response.json()
-  return json[id]
+  return json.success
 }
 
 async function fetchDevices (offline) {
@@ -230,7 +238,8 @@ async function fetchDevices (offline) {
     ...state.devices,
     ...(await devices.reduce(async (prevDevices, device) => {
       const devices = await prevDevices
-      const id = device.url.match(/\d+/)[0]
+      // const id = device.url.match(/\d+/)[0]
+      const id = device.url.split('_')[1]
 
       if (device.hasOwnProperty('offline')) {
         if (offline) {
@@ -246,8 +255,9 @@ async function fetchDevices (offline) {
 
         return devices
       } else {
-        const cookie = await getCookie(device.url)
-        const routes = await getAllRoutes(id, cookie)
+        // const cookie = await getCookie(device.url)
+        // const routes = await getAllRoutes(id, cookie)
+        const routes = await getAllRoutes(id)
 
         if (!state.devices[id]) {
           devices[id] = {}
